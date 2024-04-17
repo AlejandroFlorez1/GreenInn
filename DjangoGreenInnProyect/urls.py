@@ -24,7 +24,6 @@ urlpatterns = [
     path('login/', views.login, name='login'),
     path('', views.home, name='home'),
     path('logout/', views.exit, name='exit'),
-    path('reserva/', views.reserva, name='reserva'),
     path('acercaDe/', views.Acercade, name='acercaDe'),
     path('cabañas/', views.Cabañas , name='cabañas'),
     path('restaurante/', views.Restaurante , name='restaurante'),

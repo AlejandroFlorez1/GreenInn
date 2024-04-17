@@ -6,9 +6,6 @@ from django.contrib.auth import logout
 # Create your views here.
 
 
-def reserva(request):
-    return render(request, 'Core/reserva.html', {'form': UserCreationForm})
-
 def login(request):
     return render(request, 'registration/login.html', {'form': UserCreationForm})
 
