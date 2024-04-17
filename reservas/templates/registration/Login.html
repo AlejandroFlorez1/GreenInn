@@ -1,16 +1,53 @@
   
-    {% extends 'Core/base.html' %}
+ 
+ {% extends 'Core/base.html' %}
+ {% load static %}
+    {%block login %}
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    {%endblock%}
 
-{% block body %}
-<h3>Inicio de sesión</h3>
-    <div>
-        <form action="" method="POST">
-            {% csrf_token %}
-            <input type="text" name="username" placeholder="Nombre de Usuario">
-            <br>
-            <input type="password" name="password" placeholder="Contraseña">
-            <br>
-            <button type="submit">Iniciar sesión</button>    
-        </form>
+    {% block body %}
+    <div class="body">
+        <div class="container-form">
+            <div class="information">
+                <div class="info-childs">
+                    <h2>Bienvenido</h2>
+                    <p>Para ser parte de nuestra familia por favor inicia seción con tus datos</p>
+                    <input type="button" value="Iniciar Seción">
+                </div>
+            </div>
+            <div class="form-information">
+                <div class="form-information-childs">
+                    <h2>
+                        Crear una cuenta
+                    </h2>
+                    <div class="icons">
+                        <i class='bx bxl-google'></i>
+                        <i class='bx bxl-github' ></i>
+                        <i class='bx bxl-linkedin' ></i>
+                    </div>
+                    <p>Usa tu Email para registrarte</p>
+                    <form>
+                        {% csrf_token %}
+                        <label>
+                            <i class='bx bx-user'></i> 
+                            <input type="text" placeholder="Nomre Completo" name="username">
+                        </label>
+                        <label> 
+                            <i class='bx bx-lock-alt' ></i>
+                            <input type="password" placeholder="Contraseña" name="password">
+                        </label>
+                        <label> 
+                            <i class='bx bx-lock-alt' ></i>
+                            <input type="password" placeholder="Repite la Contraseña" name="password">
+                        </label>
+                        <input type="submit" value="Registrarse">
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-{% endblock%}
+    {% endblock%}
