@@ -1,0 +1,51 @@
+{% extends 'Core/baseHome.html' %}
+{% load static %}
+{%block body%}
+<section class="cabaña top" id="cabaña">
+    <div class="contenedor">
+        <div class="encabezado_top flex1">
+            <div class="encabezado">
+                <h5>AUMENTANTO EL CONFORT AL MÁXIMO NIVEL</h5>
+                <h2>Cabañas & Suites</h2>
+            </div>
+            <div class="boton">
+                <button class="bton1">VER MAS</button>
+            </div>
+        </div>
+
+        <div class="contenido grid">
+            <div class="box">
+                <div class="img">
+
+                    <img src='{% static "imagenes/r1.jpg" %}' alt="">
+
+                </div>
+                <div class="text">
+                    <h3>Cabañas Superiores</h3>
+                    <p> <span>$</span>192 <span>/por noche</span> </p>
+                </div>
+            </div>
+            <div class="box">
+                <div class="img">
+
+                    <img src='{% static "imagenes/r2.jpg" %}' alt="">
+
+                </div>
+                <div class="text">
+                    <h3>Cabañas Superiores</h3>
+                    <p> <span>$</span>192 <span>/por noche</span> </p>
+                </div>
+            </div>
+            <div class="box">
+                <div class="img">
+                    <img src='{% static "imagenes/r3.jpg" %}' alt="">
+                </div>
+                <div class="text">
+                    <h3>Cabañas Superiores</h3>
+                    <p> <span>$</span>192 <span>/por noche</span> </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{%endblock%}

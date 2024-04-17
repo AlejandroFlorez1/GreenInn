@@ -5,16 +5,29 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 # Create your views here.
 
-def helloword(request):
-    return render(request, 'Login/Login.html', {'form': UserCreationForm})
-
 @login_required
-def Productos(request):
-    return render(request, 'Core/main.html', {'form': UserCreationForm})
+def reserva(request):
+    return render(request, 'Core/reserva.html', {'form': UserCreationForm})
+
+def login(request):
+    return render(request, 'registration/login.html', {'form': UserCreationForm})
 
 def home(request):
-    return render(request, 'Core/index.html', {'form': UserCreationForm})
+<<<<<<< Updated upstream
+    return render(request, 'Core/prueba.html', {'form': UserCreationForm})
+=======
+    return render(request, 'Core/principalHome.html', {'form': UserCreationForm})
+>>>>>>> Stashed changes
 
 def exit(request):
     logout(request)
     return redirect('home')
+
+def Acercade(request):
+    return render (request, 'Core/acercaDeHome.html')
+
+def Cabañas(request):
+    return render (request, 'Core/cabañasHome.html')
+
+def Restaurante(request):
+    return render (request, 'Core/restauranteHome.html')

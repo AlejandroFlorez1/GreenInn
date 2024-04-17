@@ -26,8 +26,9 @@ a {
 }
 
 .head_contenedor {
-  max-width: 90%;
+  max-width: 80%;
   margin: auto;
+  border: red 2px;
 }
 
 /*--------------header--------*/
@@ -194,62 +195,17 @@ button {
 .principal .box .text {
   position: relative;
 }
+
+.principal .box .text::after{
+    position: absolute;
+    content: 'H';
+    font-size: 500px;
+    top: -120%;
+    font-weight: bold;
+    opacity: 0.1;
+}
 /*--------------Principal--------*/
 
-/*--------------Book--------*/
-.flex {
-    display: flex;
-  }
-  
-.grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 30px;
-}
-  
-.book {
-    margin-top: 5%;
-    width: 100%;
-    height: 20vh;
-    color: white;
-}
-  
-.book .cuadricula {
-    background: #242e5a;
-    padding: 20px 20px 40px 20px;
-  }
-  
-.book .buscar {
-    background: #3f9cc1;
-    padding: 20px;
-  }
-  
-input {
-    width: 100%;
-    padding: 15px;
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    outline: none;
-    background: #263760;
-    margin-top: 20px;
-    color: white;
-}
-  
-::placeholder {
-    color: white;
-}
-  
-.book .buscar {
-    width: 20%;
-}
-  
-.book .buscar input {
-    background: none;
-    border: none;
-    font-weight: bold;
-    font-size: 20px;
-    margin-top: 40px;
-}
-/*--------------Book--------*/
 
 /*--------------acercade--------*/
 .top {
@@ -378,6 +334,8 @@ input {
 .flex1{
   display: flex;
   justify-content: space-between;
+  margin-top: -10vh;
+  color: white;
 }
 
 .cabaña .grid{
@@ -392,6 +350,10 @@ input {
 .cabaña .box{
   box-shadow: 0 13px 43px 0 rgb(37 46 89/10%);
 }
+.cabaña .contenedor{
+  margin-top: -15vh;
+  max-width: 80%;
+}
 
 .cabaña .text{
   padding: 20px;
@@ -404,11 +366,16 @@ input {
 
 .cabaña p span{
   font-size: 12px;
-  color: grey;
+  color: white;
 }
 
 .cabaña p{
   font-size: 20px;
+  color: white;
+}
+
+h3{
+  color: white;
 }
 /*--------------cabaña--------*/
 
@@ -449,6 +416,11 @@ input {
   height: 100%;
 }
 
+.restaurante .contenedor{
+  border: 2px solid red;
+  background-color: white;
+  margin-top: -17vh;
+}
 .restaurante .derecha{
   padding: 50px 50px 50px 100px;
 }
