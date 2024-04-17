@@ -21,8 +21,9 @@ from reservas import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('productos/', views.Productos, name='productos'),
-    path('home/', views.home, name='home'),
+    path('login/', views.login, name='login'),
+    path('', views.home, name='home'),
     path('logout/', views.exit, name='exit'),
+    path('reserva/', views.reserva, name='reserva'),
 ]
  

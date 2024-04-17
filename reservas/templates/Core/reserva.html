@@ -1,0 +1,32 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block body %}
+<section class="book" style="margin-top: 20%;">
+    <div class="contenedor flex">
+    <div class="cuadricula grid">
+        <div class="box">
+        <label>Check-in:</label>
+        <input type="date" placeholder="Fecha Check-in">
+        </div>
+        <div class="box">
+        <label>Check-out:</label>
+        <input type="date" placeholder="Fecha-Check-out">
+        </div>
+        <div class="box">
+        <label>Adultos:</label> <br>
+        <input type="number" placeholder="0">
+        </div>
+        <div class="box">
+        <label>Niños:</label> <br>
+        <input type="number" placeholder="0">
+        </div>
+    </div>
+    <div class="buscar">
+        <input type="submit" value="BUSCAR">
+    </div>
+    </div>
+</section>
+{% endblock%}
+{%block ini%}
+    <li><a href="{% url 'home' %}" class="link-nav">Principal</a></li>
+{%endblock%}
