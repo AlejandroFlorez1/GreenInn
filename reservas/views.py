@@ -13,7 +13,7 @@ def Productos(request):
     return render(request, 'Core/main.html', {'form': UserCreationForm})
 
 def home(request):
-    return render(request, 'Core/home.html', {'form': UserCreationForm})
+    return render(request, 'Core/index.html', {'form': UserCreationForm})
 
 def exit(request):
     logout(request)

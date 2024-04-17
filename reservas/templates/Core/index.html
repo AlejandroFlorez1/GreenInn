@@ -1,0 +1,442 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <title>GardenInn</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link type="text/css" rel="stylesheet" href='{% static "css/styleindex.css" %}'>
+
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css" integrity="sha512-UTNP5BXLIptsaj5WdKFrkFov94lDx+eBvbKyoe1YAfjeRPC+gT5kyZ10kOHCfNZqEui1sxmqvodNUx3KbuYI/A==" crossorigin="anonymous"
+    referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <header class="header" id="menu-navegacion">
+        <div class="contenedor">
+            <nav>
+
+                <a href="#" class="logo"><img src='{% static "imagenes/logo.png" %}' alt=""></a>
+
+                <ul class="menu-nav">
+                    <li><a href="#principal" class="link-nav">Principal</a></li>
+                    <li><a href="#acercade" class="link-nav">Acerca de</a></li>
+                    <li><a href="#cabaña" class="link-nav">Cabañas</a></li>
+                    <li><a href="#restaurante" class="link-nav">Restaurante</a></li>
+                    <li><a href="#galeria" class="link-nav">Galeria</a></li>
+                    <li><a href="#contacto" class="link-nav">Contacto</a></li>
+                </ul>
+
+                <div class="hamburguesa">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <script>
+        const hamburguesa = document.querySelector('.hamburguesa');
+        const menuNav = document.querySelector('.menu-nav');
+
+        hamburguesa.addEventListener ("click", menuMovil);
+
+        function menuMovil() {
+            hamburguesa.classList.toggle("active");
+            menuNav.classList.toggle("active");
+        }
+
+        const linkNav = document.querySelectorAll('.link-nav');
+        linkNav.forEach((n) => n.addEventListener("click", closeMenu));
+
+        function closeMenu() {
+            hamburguesa.classList.remove("active");
+            menuNav.classList.remove("active");
+        }
+    </script>
+
+    <section class="principal" id="principal">
+        <div class="head_contenedor">
+            <div class="box">
+                <div class="text">
+                    <h1>Hola</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    <button>MORE INFO</button>
+                </div>
+            </div>
+            <div class="imagen">
+
+                <img src='{% static "imagenes/home1.jpg" %}' class="deslizar">
+            </div>
+            <div class="item-imagen">
+                <img src='{% static "imagenes/home1.jpg" %}' alt="" class="deslizar activo" onclick="img('{% static "imagenes/home1.jpg" %}')">
+                <img src='{% static "imagenes/home2.jpg" %}' alt="" class="deslizar activo"        onclick="img('{% static "imagenes/home2.jpg" %}')">
+                <img src='{% static "imagenes/home3.jpg" %}' alt="" class="deslizar activo"        onclick="img('{% static "imagenes/home3.jpg" %}')">
+                <img src='{% static "imagenes/home4.jpg" %}' alt="" class="deslizar activo"        onclick="img('{% static "imagenes/home4.jpg" %}')">
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function img(anything){
+            document.querySelector('.deslizar').src = anything;
+        }
+
+        function cambiar(change){
+            const line = document.querySelector('.imagen')
+            line.style.background = change;
+        }
+    </script>
+
+    <section class="book">
+        <div class="contenedor flex">
+        <div class="cuadricula grid">
+            <div class="box">
+            <label>Check-in:</label>
+            <input type="date" placeholder="Fecha Check-in">
+            </div>
+            <div class="box">
+            <label>Check-out:</label>
+            <input type="date" placeholder="Fecha-Check-out">
+            </div>
+            <div class="box">
+            <label>Adultos:</label> <br>
+            <input type="number" placeholder="0">
+            </div>
+            <div class="box">
+            <label>Niños:</label> <br>
+            <input type="number" placeholder="0">
+            </div>
+        </div>
+        <div class="buscar">
+            <input type="submit" value="BUSCAR">
+        </div>
+        </div>
+    </section>
+
+    <section class="acercade top" id="acercade">
+        <div class="contenedor flex">
+          <div class="izquierda">
+            <div class="img">
+
+              <img src='{% static "imagenes/a1.jpg" %}' alt="" class="imagen1">
+              <img src='{% static "imagenes/a2.jpg" %}' alt="" class="imagen2">
+            </div>
+          </div>
+          <div class="derecha">
+            <div class="encabezado">
+              <h5>AUMENTANTO EL CONFORT AL MÁXIMO NIVEL</h5>
+              <h2>Bienvenidos a GardenInn</h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+              <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+              <button class="bton1">CONTINUAR LEYENDO</button>
+            </div>
+          </div>
+        </div>
+    </section>
+
+    <section class="wrapper top">
+        <div class="contenedor">
+            <div class="text">
+                <h2>Nuestros Espacios</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+                <div class="contenido">
+                    <div class="box flex">
+                        <i class="fas fa-swimming-pool"></i>
+                        <span>Piscina</span>
+                    </div>
+                    <div class="box flex">
+                        <i class="fas fa-dumbbell"></i>
+                        <span>Gimnasio</span>
+                    </div>
+                    <div class="box flex">
+                        <i class="fas fa-spa"></i>
+                        <span>Spa & masages</span>
+                    </div>
+                    <div class="box flex">
+                        <i class="fas fa-ship"></i>
+                        <span>Paseos en Barco</span>
+                    </div>
+                    <div class="box flex">
+                        <i class="fas fa-swimmer"></i>
+                        <span>Clases de Surf</span>
+                    </div>
+                    <div class="box flex">
+                        <i class="fas fa-microphone"></i>
+                        <span>salas de Conferencias</span>
+                    </div>
+                    <div class="box flex">
+                        <i class="fas fa-water"></i>
+                        <span>Bucear</span>
+                    </div>
+                    <div class="box flex">
+                        <i class="fas fa-umbrella-beach"></i>
+                        <span>Playa privada</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cabaña top" id="cabaña">
+        <div class="contenedor">
+            <div class="encabezado_top flex1">
+                <div class="encabezado">
+                    <h5>AUMENTANTO EL CONFORT AL MÁXIMO NIVEL</h5>
+                    <h2>Cabañas & Suites</h2>
+                </div>
+                <div class="boton">
+                    <button class="bton1">VER MAS</button>
+                </div>
+            </div>
+
+            <div class="contenido grid">
+                <div class="box">
+                    <div class="img">
+
+                        <img src='{% static "imagenes/r1.jpg" %}' alt="">
+
+                    </div>
+                    <div class="text">
+                        <h3>Cabañas Superiores</h3>
+                        <p> <span>$</span>192 <span>/por noche</span> </p>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="img">
+
+                        <img src='{% static "imagenes/r2.jpg" %}' alt="">
+
+                    </div>
+                    <div class="text">
+                        <h3>Cabañas Superiores</h3>
+                        <p> <span>$</span>192 <span>/por noche</span> </p>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="img">
+                        <img src='{% static "imagenes/r3.jpg" %}' alt="">
+                    </div>
+                    <div class="text">
+                        <h3>Cabañas Superiores</h3>
+                        <p> <span>$</span>192 <span>/por noche</span> </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="wrapper wrapper2 top">
+        <div class="contenedor">
+            <div class="text">
+                <div class="encabezado">
+                    <h5>EN EL CENTRO DE LA COMUNICACIÓN</h5>
+                    <h2>Opiniones de Usuarios</h2>
+                </div>
+
+                <div class="para">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+                    <div class="box flex">
+                        <div class="img">
+                            <img src='{% static "imagenes/c.jpg" %}' alt="">
+                        </div>
+                        <div class="nombre">
+                            <h5>KATE PALMER</h5>
+                            <h5>IDAHO</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="restaurante top" id="restaurante">
+        <div class="contenedor flex">
+            <div class="izquierda">
+                <img src='{% static "imagenes/re.jpg" %}' alt="">
+            </div>
+            <div class="derecha">
+                <div class="text">
+                    <h2>Nuestro restaurante</h2>
+                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+                <div class="acordeonWrapper">
+                    <div class="acordeonItem open">
+                        <h2 class="acordeonIEncabezado">Comida italiana</h2>
+                        <div class="acordeonItemContenido">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                        </div>
+                    </div>
+                    <div class="acordeonItem close">
+                        <h2 class="acordeonIEncabezado">Comida Mexicana</h2>
+                        <div class="acordeonItemContenido">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                        </div>
+                    </div>
+                    <div class="acordeonItem close">
+                        <h2 class="acordeonIEncabezado">Comida China</h2>
+                        <div class="acordeonItemContenido">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                        </div>
+                    </div>
+                    <div class="acordeonItem close">
+                        <h2 class="acordeonIEncabezado">Comida Colombiana</h2>
+                        <div class="acordeonItemContenido">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        var acorItem = document.getElementsByClassName('acordeonItem');
+        var acorEnc = document.getElementsByClassName('acordeonIEncabezado');
+
+        for (i = 0; i < acorEnc.length; i++) {
+            acorEnc[i].addEventListener('click', toggleItem, false);
+        }
+
+        function toggleItem() {
+            var itemClass = this.parentNode.className;
+            for (var i = 0; i < acorItem.length; i++) {
+                acorItem[i].className = 'acordeonItem close';
+            }
+            if (itemClass == 'acordeonItem close') {
+                this.parentNode.className = 'acordeonItem open';
+            }
+        }
+    </script>
+
+    <section class="galeria mtop" id="galeria">
+        <div class="contenedor">
+            <div class="encabezado_top flex1">
+                <div class="encabezado">
+                    <h5>BIENVENIDOS A NUESTRA GALERIA</h5>
+                    <h2>Galeria de fotos de GardenInn</h2>
+                </div>
+                <div class="boton">
+                    <button class="bton1">VER GALERIA</button>
+                </div>
+            </div>
+
+            <div class="owl-carousel owl-theme">
+                <div class="item">
+
+                    <img src='{% static "imagenes/g1.jpg" %}' alt="">
+                </div>
+                <div class="item">
+                    <img src='{% static "imagenes/g2.jpg" %}' alt="">
+                </div>
+                <div class="item">
+                    <img src='{% static "imagenes/g3.jpg" %}' alt="">
+                </div>
+                <div class="item">
+                    <img src='{% static "imagenes/g4.jpg" %}' alt="">
+                </div>
+                <div class="item">
+                    <img src='{% static "imagenes/g5.jpg" %}' alt="">
+                </div>
+                <div class="item">
+                    <img src='{% static "imagenes/g6.jpg" %}' alt="">
+                </div>
+                <div class="item">
+                    <img src='{% static "imagenes/g7.jpg" %}' alt="">
+                </div>
+                <div class="item">
+                    <img src='{% static "imagenes/g8.jpg" %}' alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.js" integrity="sha512-gY25nC63ddE0LcLPhxUJGFxa2GoIyA5FLym4UJqHDEMHjp8RET6Zn/SHo1sltt3WuVtqfyxECP38/daUc/WVEA==" crossorigin="anonymous"
+    referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous"
+    referrerpolicy="no-referrer"></script>
+    <script>
+        $('.owl-carousel').owlCarousel({
+            loop: true,
+            margin: 10,
+            nav: true,
+            dots: false,
+            navText: ["<i class='fas fa-chevron-left'></i>", "<i class='fas fa-chevron-right'></i>"],
+            responsive: {
+                0: {
+                    items: 1
+                },
+                768: {
+                    items: 2
+                },
+                1000: {
+                    items: 4
+                }
+            }
+        })
+    </script>
+
+    <section class="mapa top">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15898.642281697817!2d-74.34607286599669!3d4.995926369685875!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e4085b696b06b55%3A0x96698b81259a125a!2sLa%20Vega%2C%20Cundinamarca!5e0!3m2!1ses-419!2sco!4v1713072388398!5m2!1ses-419!2sco" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </section>
+
+    <footer>
+        <div class="contenedor grid top">
+            <div class="box">
+                <img src="https://img.icons8.com/external-flatart-icons-flat-flatarticons/48/000000/external-hotel-hotel-services-and-city-elements-flatart-icons-flat-flatarticons-1.png" />
+                <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+                <p>Metodos de pago aceptados</p>
+                <div class="pago grid">
+                    <img src="https://img.icons8.com/color/48/000000/visa.png" />
+                    <img src="https://img.icons8.com/color/48/000000/mastercard.png" />
+                    <img src="https://img.icons8.com/color-glass/48/000000/paypal.png" />
+                    <img src="https://img.icons8.com/fluency/48/000000/amex.png" />
+                </div>
+            </div>
+
+            <div class="box">
+                <h3>Lo más reciente</h3>
+                <ul>
+                    <li>Our Secret Island Boat Tour Is Just for You</li>
+                    <li>Chill and Escape in Our Natural Shelters</li>
+                    <li>September in Luviana Hotel</li>
+                    <li>Live Music Concerts at Luviana</li>
+                </ul>
+            </div>
+
+            <div class="box">
+                <h3>Para Clientes</h3>
+                <ul>
+                    <li>About Luviana</li>
+                    <li>Customer Care/Help</li>
+                    <li>Corporate Accounts</li>
+                    <li>Financial Information</li>
+                    <li>Terms & Conditions</li>
+                </ul>
+            </div>
+
+            <div class="box">
+                <h3>Contactanos</h3>
+                <ul>
+                    <li>3015 Grand Ave, Cocount Grove, Merrick Way FL 123456</li>
+                    <li><i class="far fa-envelope"></i>ejemplocorreo@gmail.com </li>
+                    <li><i class="far fa-phone-alt"></i>123 456 7898 </li>
+                    <li><i class="far fa-phone-alt"></i>123 456 7898 </li>
+                    <li><i class="far fa-comments"></i>24/ 7 Customer Services </li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
