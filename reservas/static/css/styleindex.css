@@ -26,8 +26,9 @@ a {
 }
 
 .head_contenedor {
-  max-width: 90%;
+  max-width: 80%;
   margin: auto;
+  border: red 2px;
 }
 
 /*--------------header--------*/
@@ -333,6 +334,8 @@ button {
 .flex1{
   display: flex;
   justify-content: space-between;
+  margin-top: -10vh;
+  color: white;
 }
 
 .cabaña .grid{
@@ -347,6 +350,10 @@ button {
 .cabaña .box{
   box-shadow: 0 13px 43px 0 rgb(37 46 89/10%);
 }
+.cabaña .contenedor{
+  margin-top: -15vh;
+  max-width: 80%;
+}
 
 .cabaña .text{
   padding: 20px;
@@ -359,11 +366,16 @@ button {
 
 .cabaña p span{
   font-size: 12px;
-  color: grey;
+  color: white;
 }
 
 .cabaña p{
   font-size: 20px;
+  color: white;
+}
+
+h3{
+  color: white;
 }
 /*--------------cabaña--------*/
 
@@ -404,6 +416,11 @@ button {
   height: 100%;
 }
 
+.restaurante .contenedor{
+  border: 2px solid red;
+  background-color: white;
+  margin-top: -17vh;
+}
 .restaurante .derecha{
   padding: 50px 50px 50px 100px;
 }
