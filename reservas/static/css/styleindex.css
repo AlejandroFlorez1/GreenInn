@@ -196,14 +196,6 @@ button {
   position: relative;
 }
 
-.principal .box .text::after{
-    position: absolute;
-    content: 'H';
-    font-size: 500px;
-    top: -120%;
-    font-weight: bold;
-    opacity: 0.1;
-}
 /*--------------Principal--------*/
 
 
