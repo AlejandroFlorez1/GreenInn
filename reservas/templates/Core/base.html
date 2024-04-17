@@ -1,0 +1,51 @@
+{% load static %}
+
+
+<head>
+    {% block header %}
+    <title>GardenInn</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link type="text/css" rel="stylesheet" href='{% static "/css/styleindex.css" %}'>
+
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css" integrity="sha512-UTNP5BXLIptsaj5WdKFrkFov94lDx+eBvbKyoe1YAfjeRPC+gT5kyZ10kOHCfNZqEui1sxmqvodNUx3KbuYI/A==" crossorigin="anonymous"
+    referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    {% endblock %}
+</head>
+<header class="header" id="menu-navegacion">
+    <div class="contenedor">
+        <nav>
+            <a href="#" class="logo"><img src='{% static "imagenes/r1.jpg" %}' alt=""></a>
+            <ul class="menu-nav">
+                {%block ini%}
+                <li><a href="{% url 'reserva' %}" class="link-nav">Reserva Ya</a></li>
+                {%endblock%}
+                <li><a href="#acercade" class="link-nav">Acerca de</a></li>
+                <li><a href="#cabaña" class="link-nav">Cabañas</a></li>
+                <li><a href="#restaurante" class="link-nav">Restaurante</a></li>
+                <li><a href="#galeria" class="link-nav">Galeria</a></li>
+                <li><a href="{% url 'login' %}" class="link-nav">Login</a></li>
+            </ul>
+            <div class="hamburguesa">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+    </div>
+</header>
+<section class="principal" id="principal">
+    <div class="head_contenedor">
+        {% block txt_principal%}{%  endblock %}
+        <div class="imagen">
+            <img src='{% static "imagenes/home1.jpg" %}' class="deslizar">
+        </div>
+        {% block images_principal%}{% endblock%}
+    </div>
+</section>
+{% block body %}{% endblock%}

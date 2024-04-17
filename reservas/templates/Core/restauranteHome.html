@@ -1,0 +1,62 @@
+{% extends 'Core/baseHome.html' %}
+{% load static %}
+{%block body%}
+<section class="restaurante top" id="restaurante">
+    <div class="contenedor flex">
+        <div class="izquierda">
+            <img src='{% static "imagenes/re.jpg" %}' alt="">
+        </div>
+        <div class="derecha">
+            <div class="text">
+                <h2>Nuestro restaurante</h2>
+                <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </div>
+            <div class="acordeonWrapper">
+                <div class="acordeonItem open">
+                    <h2 class="acordeonIEncabezado">Comida italiana</h2>
+                    <div class="acordeonItemContenido">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    </div>
+                </div>
+                <div class="acordeonItem close">
+                    <h2 class="acordeonIEncabezado">Comida Mexicana</h2>
+                    <div class="acordeonItemContenido">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    </div>
+                </div>
+                <div class="acordeonItem close">
+                    <h2 class="acordeonIEncabezado">Comida China</h2>
+                    <div class="acordeonItemContenido">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    </div>
+                </div>
+                <div class="acordeonItem close">
+                    <h2 class="acordeonIEncabezado">Comida Colombiana</h2>
+                    <div class="acordeonItemContenido">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    var acorItem = document.getElementsByClassName('acordeonItem');
+    var acorEnc = document.getElementsByClassName('acordeonIEncabezado');
+
+    for (i = 0; i < acorEnc.length; i++) {
+        acorEnc[i].addEventListener('click', toggleItem, false);
+    }
+
+    function toggleItem() {
+        var itemClass = this.parentNode.className;
+        for (var i = 0; i < acorItem.length; i++) {
+            acorItem[i].className = 'acordeonItem close';
+        }
+        if (itemClass == 'acordeonItem close') {
+            this.parentNode.className = 'acordeonItem open';
+        }
+    }
+</script>
+{%endblock%}

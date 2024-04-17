@@ -1,0 +1,34 @@
+{% extends 'Core/principalHome.html' %}
+{% load static %}
+{%block css%}
+    <link type="text/css" rel="stylesheet" href='{% static "css/stylePrincipalHome.css" %}'>
+{%endblock%}
+{%block images%}
+<div class="contenedor">
+    <nav>
+
+        <a href="#" class="logo"><img src='{% static "imagenes/logo.png" %}' alt=""></a>
+        <ul class="menu-nav">
+            <li><a href="{% url 'home'%}" class="link-nav">Inicio</a></li>
+        </ul>
+        </nav class='nav'>
+        <\<ul class='list'>
+            <li class='list__button'>
+                <img src='imagenes/dashboard.svg' class="list__img">
+                <a href="#"" class="nav__link">Inicio<\a>
+            </li>
+            <\<li class='list__item'>
+                <div class="'list__button list__button--click">
+                    <img src='imagenes/docs.svg' class="list__img">
+                    <\<a href="#" class='list__img'>Servicos</a>
+                    <img src='imagenes/arrow.svg' class="list__arrow">
+                </div>
+                <\<ul class='list__show'>
+                    <li class="list__inside">   </li>
+                    <a href="#"  class="nav__link--inside"></a>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</div>
+{%endblock%}

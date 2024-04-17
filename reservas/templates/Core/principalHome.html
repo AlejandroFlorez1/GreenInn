@@ -1,0 +1,20 @@
+{% extends 'Core/baseHome.html' %}
+{% load static %}
+{%block css%}
+    <link type="text/css" rel="stylesheet" href='{% static "css/stylePrincipalHome.css" %}'>
+{%endblock%}
+{%block text%}
+<div class="text">
+    <h1>Hola</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    <button>MORE INFO</button>
+</div>
+{%endblock%}
+{%block images%}
+<div class="item-imagen">
+    <img src='{% static "imagenes/home1.jpg" %}' alt="" class="deslizar activo" onclick="img('{% static "imagenes/home1.jpg" %}')">
+    <img src='{% static "imagenes/home2.jpg" %}' alt="" class="deslizar activo"        onclick="img('{% static "imagenes/home2.jpg" %}')">
+    <img src='{% static "imagenes/home3.jpg" %}' alt="" class="deslizar activo"        onclick="img('{% static "imagenes/home3.jpg" %}')">
+    <img src='{% static "imagenes/home4.jpg" %}' alt="" class="deslizar activo"        onclick="img('{% static "imagenes/home4.jpg" %}')">
+</div>
+{%endblock%}

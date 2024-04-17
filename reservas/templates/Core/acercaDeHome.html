@@ -1,0 +1,50 @@
+{% extends 'Core/baseHome.html' %}
+{% load static %}
+{%block css%}
+    <link type="text/css" rel="stylesheet" href='{% static "css/styleAcercaDeHome.css" %}'>
+{%endblock%}
+{%block body%}
+<section class="wrapper top">
+    <div class="contenedor">
+        <div class="text">
+            <h2>Nuestros Espacios</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+            <div class="contenido">
+                <div class="box flex">
+                    <i class="fas fa-swimming-pool"></i>
+                    <span>Piscina</span>
+                </div>
+                <div class="box flex">
+                    <i class="fas fa-dumbbell"></i>
+                    <span>Gimnasio</span>
+                </div>
+                <div class="box flex">
+                    <i class="fas fa-spa"></i>
+                    <span>Spa & masages</span>
+                </div>
+                <div class="box flex">
+                    <i class="fas fa-ship"></i>
+                    <span>Paseos en Barco</span>
+                </div>
+                <div class="box flex">
+                    <i class="fas fa-swimmer"></i>
+                    <span>Clases de Surf</span>
+                </div>
+                <div class="box flex">
+                    <i class="fas fa-microphone"></i>
+                    <span>salas de Conferencias</span>
+                </div>
+                <div class="box flex">
+                    <i class="fas fa-water"></i>
+                    <span>Bucear</span>
+                </div>
+                <div class="box flex">
+                    <i class="fas fa-umbrella-beach"></i>
+                    <span>Playa privada</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{%endblock%}
