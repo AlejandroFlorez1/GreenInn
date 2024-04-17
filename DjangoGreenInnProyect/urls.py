@@ -21,8 +21,15 @@ from reservas import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('productos/', views.Productos, name='productos'),
-    path('home/', views.home, name='home'),
+    path('login/', views.login, name='login'),
+    path('', views.home, name='home'),
     path('logout/', views.exit, name='exit'),
+<<<<<<< Updated upstream
+    path('reserva/', views.reserva, name='reserva'),
+=======
+    path('AcercaDE/', views.Acercade, name='acercaDe'),
+    path('Cabañas/', views.Cabañas, name='cabañas'),
+    path('Restaurante/', views.Restaurante, name='restaurante'),
+>>>>>>> Stashed changes
 ]
  
