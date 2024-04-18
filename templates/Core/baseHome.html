@@ -1,0 +1,124 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <title>GardenInn</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {%block head%}{%endblock%}
+    <link type="text/css" rel="stylesheet" href='{% static "css/styleindex.css" %}'>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css" integrity="sha512-UTNP5BXLIptsaj5WdKFrkFov94lDx+eBvbKyoe1YAfjeRPC+gT5kyZ10kOHCfNZqEui1sxmqvodNUx3KbuYI/A==" crossorigin="anonymous"
+    referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <header class="header" id="menu-navegacion">
+        <div class="contenedor">
+            <nav>
+
+                <a href="#" class="logo"><img src='{% static "imagenes/logo.png" %}' alt=""></a>
+
+                <ul class="menu-nav">
+                    <li><a href="{% url 'home'%}" class="link-nav">Principal</a></li>
+                    <li><a href="{% url 'acercaDe'%}"  class="link-nav">Acerca de</a></li>
+                    <li><a href="{% url 'cabañas'%}" class="link-nav">Cabañas</a></li>
+                    <li><a href="{% url 'restaurante'%}" class="link-nav">Restaurante</a></li>
+                    <li><a href="#galeria" class="link-nav">Galeria</a></li>
+                    <li><a href="{% url 'login'%}" class="link-nav">Login</a></li>
+                </ul>
+
+                <div class="hamburguesa">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <script>
+        const hamburguesa = document.querySelector('.hamburguesa');
+        const menuNav = document.querySelector('.menu-nav');
+
+        hamburguesa.addEventListener ("click", menuMovil);
+
+        function menuMovil() {
+            hamburguesa.classList.toggle("active");
+            menuNav.classList.toggle("active");
+        }
+
+        const linkNav = document.querySelectorAll('.link-nav');
+        linkNav.forEach((n) => n.addEventListener("click", closeMenu));
+
+        function closeMenu() {
+            hamburguesa.classList.remove("active");
+            menuNav.classList.remove("active");
+        }
+    </script>
+
+    <section class="principal" id="principal">
+        <div class="head_contenedor">
+            <div class="box">
+                {%block text%}{%endblock%}
+            </div>
+            <div class="imagen">
+
+                <img src='{% static "imagenes/home1.jpg" %}' class="deslizar">
+            </div>
+            {%block images%}{%endblock%}
+        </div>
+    </section>
+    <script>
+        function img(anything){
+            document.querySelector('.deslizar').src = anything;
+        }
+
+        function cambiar(change){
+            const line = document.querySelector('.imagen')
+            line.style.background = change;
+        }
+    </script>
+    {%block body%}{%endblock%}
+    <footer>
+        <div class="contenedor grid top">
+
+            <div class="box">
+                <h3>Lo más reciente</h3>
+                <ul>
+                    <li>Our Secret Island Boat Tour Is Just for You</li>
+                    <li>Chill and Escape in Our Natural Shelters</li>
+                    <li>September in Luviana Hotel</li>
+                    <li>Live Music Concerts at Luviana</li>
+                </ul>
+            </div>
+
+            <div class="box">
+                <h3>Para Clientes</h3>
+                <ul>
+                    <li>About Luviana</li>
+                    <li>Customer Care/Help</li>
+                    <li>Corporate Accounts</li>
+                    <li>Financial Information</li>
+                    <li>Terms & Conditions</li>
+                </ul>
+            </div>
+
+            <div class="box">
+                <h3>Contactanos</h3>
+                <ul>
+                    <li>3015 Grand Ave, Cocount Grove, Merrick Way FL 123456</li>
+                    <li><i class="far fa-envelope"></i>ejemplocorreo@gmail.com </li>
+                    <li><i class="far fa-phone-alt"></i>123 456 7898 </li>
+                    <li><i class="far fa-phone-alt"></i>123 456 7898 </li>
+                    <li><i class="far fa-comments"></i>24/ 7 Customer Services </li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>

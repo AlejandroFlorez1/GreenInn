@@ -7,10 +7,10 @@ from django.contrib.auth import logout
 
 
 def login(request):
-    return render(request, 'registration/login.html', {'form': UserCreationForm})
+    return render(request, 'registration/login.html')
 
 def home(request):
-    return render(request, 'Core/principalHome.html', {'form': UserCreationForm})
+    return render(request, 'Core/principalHome.html')
 
 def exit(request):
     logout(request)
