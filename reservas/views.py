@@ -13,11 +13,7 @@ def login(request):
     return render(request, 'registration/login.html', {'form': UserCreationForm})
 
 def home(request):
-<<<<<<< Updated upstream
     return render(request, 'Core/prueba.html', {'form': UserCreationForm})
-=======
-    return render(request, 'Core/principalHome.html', {'form': UserCreationForm})
->>>>>>> Stashed changes
 
 def exit(request):
     logout(request)
