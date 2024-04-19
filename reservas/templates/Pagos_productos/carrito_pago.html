@@ -14,37 +14,57 @@
             <nav>
                 <ul>
                     <li>
-                        <button class="boton-menu"><i class="bi bi-hand-index-thumb-fill"></i>Todos los productos</button>
+                        <a class="boton-menu boton-volver" href="main_pago.html">
+                            <i class="bi bi-arrow-return-left"></i> Seguir comprando 
+                        </a>
                     </li>
                     <li>
-                        <button class="boton-menu"><i class="bi bi-hand-index-thumb-fill"></i>Desayuno</button>
+                        <a class="boton-menu boton-carrito active" href="carrito_pago.html">
+                            Carrito 
+                        </a>
                     </li>
-                    <li>
-                        <button class="boton-menu"><i class="bi bi-hand-index-thumb-fill"></i>Almuerzo</button>
-                    </li>
-                    <li>
-                        <button class="boton-menu"><i class="bi bi-hand-index-thumb-fill"></i>Comidas rapidas</button>
-                    </li>
-                    <li>
-                        <button class="boton-menu"><i class="bi bi-hand-index-thumb-fill"></i>Snacks</button></li>
-                    <li>
-                        <button class="boton-menu"><i class="bi bi-hand-index-thumb-fill"></i>Bebidas</button>
-                    </li>
-                    <li><a class="boton-carrito" href="carrito_pago.html">Carrito <span class="numero">0  </span></a></li>
                 </ul>
             </nav>
         </aside>
         <main>
-            <h2 class="titulo-principal">Todos los productos</h2>
-            <div class="contenedor-productos">
-                <div class="producto">
-                    <img src="path/to/sample-image.jpg" alt="Nombre del Producto">
-                    <h3>Nombre del Producto</h3>
-                    <p>Precio: $00.00</p>
-                    <p>Categoría: Nombre de la Categoría</p>    
-                    <p>Descripción: Descripción breve del producto.</p>
-                    <p>En stock: 00</p>
+            <h2 class="titulo-principal">Carrito</h2>
+            <div class="contenedor-carrito">
+               <p class="carrito-vacio">Tu carrito esta vacio. <i class="bi bi-emoji-frown"></i></p>
+               
+               <div class="carrito-productos">
+                    <div class="carrito-producto">
+                        <p>imagen</p>
+                        <div class="carrito-producto-titulo">
+                            <small>Titulo</small>
+                            <h3>Nombre producto</h3>
+                        </div>
+                        <div class="carrito-producto-cantidad">
+                            <small>Cantidad</small>
+                            <p>1</p>
+                        </div>
+                        <div class="carrito-producto-precio">
+                            <small>Precio</small>
+                            <p>1$</p>
+                        </div>
+                        <div class="carrito-producto-subtotal">
+                            <small>Subtotal</small>
+                            <p>1$</p>
+                        </div>
+                        <button class="carrito-producto-eliminar"><i class="bi bi-trash-fill"></i></button>
+                    </div>
+               </div>
+               <div class="carrito-acciones">
+                <div class="carrito-acciones-izquierda">
+                    <button class="carrito-acciones-vaciar">Vaciar carrito</button>
                 </div>
+                <div class="carrito-acciones-derecha">
+                    <div class="carrito-acciones-total">
+                    <p>Total</p>
+                    <p class="total">$$$</p>
+                    </div>
+                    <button class="carrito-opciones-comprar">Comprar</button>
+                </div>
+               </div>
             </div>
         </main>
     </div>
