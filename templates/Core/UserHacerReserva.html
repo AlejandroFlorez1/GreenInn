@@ -103,9 +103,8 @@
             var fechas_disponibles_json = '{{ fechas_disponibles_json }}';
             var fechas_disponibles = JSON.parse(fechas_disponibles_json);
             console.log(fechas_disponibles);
-            
             fechas_disponibles.forEach(function(fecha) {
-            console.log('Día disponible:', fecha[0], ', Mes disponible:', fecha[1]);
+            console.log('Día:', fecha[0], ', Mes:', fecha[1]);
             });
         </script>
 
@@ -150,10 +149,14 @@
                 for (let i = 1; i <= daysInMonth; i++) {
                     const date = new Date(currentYear, currentMonth, i);
                     const className = getDayClassName(date);
+                    diasOcupados(i, currentMonth + 1, currentYear);
                     days += `<div class="calendar-day ${className}" onclick="selectDate(${i})">${i}</div>`;
                 }
     
                 calendarBody.innerHTML = days;
+            }
+            function diasOcupados(dia, mes, año){
+                
             }
     
             function selectDate(day){
