@@ -22,7 +22,6 @@ a {
 
 .contenedor {
   display: block;
-  border: 2px solid red;
   max-width: 80%;
   margin: auto;
   margin-top: 3%;

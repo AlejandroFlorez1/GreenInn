@@ -18,7 +18,7 @@ class Estado(models.Model):
     tipEstado = models.CharField(max_length=15, verbose_name='Tipo de estado')
 
     def __str__(self):
-        return self.nomEstado
+        return self.tipEstado
     
     class Meta:
         verbose_name = 'estado'

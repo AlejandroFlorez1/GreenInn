@@ -1,0 +1,204 @@
+{% extends 'Core/baseUser.html' %}
+
+{% block body %}
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+    
+    body{
+        background: white;
+    }
+    
+    .calendar{
+        width: 350px;
+        background-color: #fff;
+        margin: 0 auto;
+        font-family: Arial, sans-serif;
+        border-radius: 5px;
+        box-shadow: 0 10px 29px -7px rgba(63,63,63,0.48);
+    }
+    
+    .calendar-header{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    .calendar-header button{
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        font-size: 18px;
+    }
+    
+    .calendar-body{
+        display: grid;
+        grid-template-columns: repeat(7,1fr);
+    }
+    
+    .calendar-day{
+        border: 1px solid #fff;
+        border-radius: 50%;
+        padding: 10px;
+        margin: 5px;
+        text-align: center;
+        cursor: pointer;
+    }
+    
+    .calendar-day:hover{
+        background-color: #ddd !important;
+        transition: background-color 0.3s ease;
+    }
+    
+    .calendar-day.selected{
+        border: 1px solid #003879d0;
+        background-color: rgba(70,201,240);
+    }
+    
+    .calendar-day.range{
+        border: 1px solid #007900d0;
+        background-color: rgba(86,238,86);
+    }
+    
+    #prevBtn, #nextBtn{
+        width: 40px;
+        height: 40px;
+        padding: 10px;
+        margin: 0 10px 0 10px;
+        border-radius: 50%;
+        background-color: #fff;
+    }
+    
+    #prevBtn:hover{
+        background-color: #ddd !important;
+        transition: background-color 0.3s ease;
+    }
+    
+    #nextBtn:hover{
+        background-color: #ddd !important;
+        transition: background-color 0.3s ease;
+    }
+    
+    #selectedDates{
+        font-family: 'Poppins';
+    }
+    
+    #currentMonth{
+        font-family: 'Poppins';
+        font-size: 18px;
+    }
+    </style>
+    <body>
+        <h3 id="selectedDates">Fechas seleccionadas:</h3>
+    
+        <div class="calendar">
+            <div class="calendar-header">
+                <button id="prevBtn" class="calendar-btn"><i class="fas fa-angle-left"></i></button>
+                <h2 id="currentMonth"></h2>
+                <button id="nextBtn" class="calendar-btn"><i class="fas fa-angle-right"></i></button>
+            </div>
+            <div id="calendarBody" class="calendar-body"></div>
+        </div>
+
+        <script>
+            var fechas_disponibles_json = '{{ fechas_disponibles_json }}';
+            var fechas_disponibles = JSON.parse(fechas_disponibles_json);
+            console.log(fechas_disponibles);
+            
+            fechas_disponibles.forEach(function(fecha) {
+            console.log('Día disponible:', fecha[0], ', Mes disponible:', fecha[1]);
+            });
+        </script>
+
+
+
+        <script>
+
+            const currentDate = new Date();
+            let currentMonth = currentDate.getMonth();
+            let currentYear = currentDate.getFullYear();
+            let startDate = null;
+            let endDate = null;
+    
+            const calendarBody = document.getElementById('calendarBody');
+            const currentMonthElement = document.getElementById('currentMonth');
+            const selectedDatesElement = document.getElementById('selectedDates');
+    
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+    
+            prevBtn.addEventListener('click',()=>{
+                currentMonth--;
+                renderCalendar();
+            });
+            nextBtn.addEventListener('click',()=>{
+                currentMonth++;
+                renderCalendar();
+            });
+    
+            function renderCalendar(){
+                const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+                const firstDayIndex = new Date(currentYear, currentMonth, 1).getDay();
+    
+                currentMonthElement.textContent = new Date(currentYear, currentMonth).toLocaleDateString('default',{month: 'long', year: 'numeric'});
+    
+                let days = '';
+    
+                for (let i = 1; i <= firstDayIndex; i++) {
+                    days += `<div class="calendar-day"></div>`;
+                }
+    
+                for (let i = 1; i <= daysInMonth; i++) {
+                    const date = new Date(currentYear, currentMonth, i);
+                    const className = getDayClassName(date);
+                    days += `<div class="calendar-day ${className}" onclick="selectDate(${i})">${i}</div>`;
+                }
+    
+                calendarBody.innerHTML = days;
+            }
+    
+            function selectDate(day){
+                const clickedDate = new Date(currentYear, currentMonth, day);
+                if (!startDate || endDate){
+                    startDate = clickedDate;
+                    endDate = null;
+                } else if (clickedDate < startDate){
+                    startDate = clickedDate;
+                } else if (clickedDate > startDate){
+                    endDate = clickedDate;
+                }
+    
+                renderCalendar();
+                updateSelectedDates();
+            }
+    
+            function updateSelectedDates(){
+                if(startDate && endDate){
+                    selectedDatesElement.textContent = `Fechas seleccionadas: ${formatDate(startDate)} - ${formatDate(endDate)}`;
+                } else if (startDate){
+                    selectedDatesElement.textContent = `Fechas seleccionadas: ${formatDate(startDate)}`;
+                } else {
+                    selectedDatesElement.textContent = `Fechas seleccionadas:`;
+                }
+            }
+    
+            function getDayClassName(date){
+                if (startDate && date.toDateString() === startDate.toDateString()){
+                    return 'selected';
+                }
+                if (endDate && date.toDateString() === endDate.toDateString()){
+                    return 'selected';
+                }
+                if (startDate && endDate && date > startDate && date < endDate){
+                    return 'range';
+                }
+                return '';
+            }
+    
+            function formatDate(date){
+                return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+            }
+    
+            renderCalendar();
+            updateSelectedDates();
+        </script>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% load static %}
+<head>
+    <link type="text/css" rel="stylesheet" href='{% static "css/styleUser.css" %}'>
+</head>
+<header class="header" id="menu-navegacion">
+    <div class="contenedor">
+        <nav>
+            {{user.username}}
+            <a href="#" class="logo"><img src='{% static "imagenes/logo.png" %}' alt=""></a>
+            <ul class="menu-nav">
+
+                <li><a href="{% url 'User_Hacer_Reserva' %}" class="link-nav">Reserva Ya</a></li>
+                <li><a href="{% url 'User_Historial_Reservas' %}" class="link-nav">Mis Reservas</a></li>
+                <li><a href="{% url 'exit' %}" class="link-nav">Cerrar sesión</a></li>
+            </ul>
+            <div class="hamburguesa">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+    </div>
+</header>
+{% block body %}{% endblock %}

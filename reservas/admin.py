@@ -13,7 +13,7 @@ class EstadoAdmin(admin.ModelAdmin):
 admin.site.register(Estado, EstadoAdmin)
 
 class CabañaAdmin(admin.ModelAdmin):
-    list_display = ('nomCabaña', 'perMax', 'precio', 'descripcion', 'imagen')
+    list_display = ( 'id','nomCabaña', 'perMax', 'precio', 'descripcion', 'imagen')
 
 admin.site.register(Cabaña, CabañaAdmin)
 
