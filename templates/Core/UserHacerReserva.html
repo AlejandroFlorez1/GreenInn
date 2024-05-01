@@ -1,5 +1,7 @@
 {% extends 'Core/baseUser.html' %}
 
+{% load static %}
+
 {% block body %}
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
@@ -7,7 +9,6 @@
     body{
         background: white;
     }
-    
     .calendar{
         width: 350px;
         background-color: #fff;
@@ -86,8 +87,58 @@
         font-family: 'Poppins';
         font-size: 18px;
     }
-    </style>
+    .container1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+input[type="date"],
+select,
+input[type="submit"] {
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+input[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+</style>
     <body>
+        <div class="container1">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <input type="date" name="dateEntrada" id="dateEntrada" placeholder="Fecha Entrada">
+                <input type="date" name="dateSalida" id="dateSalida" placeholder="Fecha Salida">
+                <select name="cabaña" id="">
+                    <option value="">Cabaña</option>
+                    {% for cabania in cabanias %}
+                    <option value="{{ cabania.id }}">{{ cabania }}</option>
+                    {% endfor %}
+                </select>
+                <input type="submit" value="Buscar">
+
+            </form>
+        </div>
         <h3 id="selectedDates">Fechas seleccionadas:</h3>
     
         <div class="calendar">
@@ -102,7 +153,6 @@
         <script>
             var fechas_disponibles_json = '{{ fechas_disponibles_json }}';
             var fechas_disponibles = JSON.parse(fechas_disponibles_json);
-            console.log(fechas_disponibles);
             fechas_disponibles.forEach(function(fecha) {
             console.log('Día:', fecha[0], ', Mes:', fecha[1]);
             });
@@ -121,6 +171,9 @@
             const calendarBody = document.getElementById('calendarBody');
             const currentMonthElement = document.getElementById('currentMonth');
             const selectedDatesElement = document.getElementById('selectedDates');
+            const fechaEntrada = document.getElementById('dateEntrada');
+            const fechaSalida = document.getElementById('dateSalida');
+
     
             const prevBtn = document.getElementById('prevBtn');
             const nextBtn = document.getElementById('nextBtn');
@@ -149,14 +202,23 @@
                 for (let i = 1; i <= daysInMonth; i++) {
                     const date = new Date(currentYear, currentMonth, i);
                     const className = getDayClassName(date);
-                    diasOcupados(i, currentMonth + 1, currentYear);
-                    days += `<div class="calendar-day ${className}" onclick="selectDate(${i})">${i}</div>`;
+                    if (diasOcupados(i, currentMonth+1, currentYear)){
+                        days += `<div class="calendar-day ${className}" style="background-color: gray    ; cursor: default;">${i}</div>`;
+                    }     
+                    else {
+                        days += `<div class="calendar-day ${className}" onclick="selectDate(${i})">${i}</div>`;
+                    }
                 }
     
                 calendarBody.innerHTML = days;
             }
             function diasOcupados(dia, mes, año){
-                
+                var i=false;
+                fechas_disponibles.forEach(function(fecha) {
+                if (fecha[0]===dia && fecha[1]==mes)
+                    i=true;
+                });
+                return i;
             }
     
             function selectDate(day){
@@ -177,10 +239,16 @@
             function updateSelectedDates(){
                 if(startDate && endDate){
                     selectedDatesElement.textContent = `Fechas seleccionadas: ${formatDate(startDate)} - ${formatDate(endDate)}`;
+                    fechaEntrada.value = formatDate(startDate);
+                    fechaSalida.value = formatDate(endDate);
                 } else if (startDate){
                     selectedDatesElement.textContent = `Fechas seleccionadas: ${formatDate(startDate)}`;
+                    fechaEntrada.value = formatDate(startDate);
+                    fechaSalida.value = '';
                 } else {
                     selectedDatesElement.textContent = `Fechas seleccionadas:`;
+                    fechaEntrada.value = '';
+                    fechaSalida.value = '';
                 }
             }
     
@@ -198,7 +266,7 @@
             }
     
             function formatDate(date){
-                return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+                return `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
             }
     
             renderCalendar();

@@ -14,7 +14,7 @@ class Profile(models.Model):
         verbose_name_plural  = 'perfiles'
         ordering = ['-id']
 
-    def __srt__(self):
+    def __str__(self):
         return self.user.username
     
 def create_user_profile(sender, instance, created, **kwargs):
