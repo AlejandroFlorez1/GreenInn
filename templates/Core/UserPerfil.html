@@ -1,5 +1,151 @@
 {% extends 'Core/baseUser.html' %}
-
+{% load static %}
 {% block body %}
+<style>
+    .información {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+        
+    }
+    .información h1 {
+        color: white;
+    }
+    .input {
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+        margin-bottom: 10px;
+    }
+    .input input {
+        border: none; /* Sin borde */
+        background-color: transparent; /* Sin color de fondo */
+        padding: 0; /* Sin relleno */
+        margin: 0; /* Sin margen */
+        outline: none; /* Sin contorno de foco */
+        border-bottom: 1px solid white; /* Solo un borde inferior */
+        width: 100%; /* Opcional: llenar el ancho del contenedor */
+        color: white;
+    }
+    .box-informacion {
+        width: 70%;
+        margin-top: 4vh;
+    }
+    .información form{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: white;
+    }
+    .box-imagen {
+        margin-top: 4vh;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%; /* Borde redondeado para hacer un círculo */
+        overflow: hidden; /* Para ocultar partes de la imagen que se salgan del círculo */
+        margin-bottom: 5vh;
 
+    }
+    .upload-btn {
+        background-color: transparent;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .upload-btn:hover {
+        background-color: #c0ccd9;
+    }
+
+    #image-upload {
+        display: none;
+    }
+    .input input[type="text"]:hover,
+    .input input[type="number"]:hover {
+        caret-color: white !important; /* Cambia el color del cursor al pasar sobre el input */
+    }
+</style>
+<div>
+    <div class="información">
+        {% if user.first_name %}
+        <h1>HOLA! {{ user.first_name }}</h1>
+        {%else  %}
+        <h1>HOLA! {{ user.username }}</h1>
+        {% endif %}
+        <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="box-imagen">
+            <img id="profile-image" src="{% if profile.image %}{{ profile.image.url }}{% else %}{% static 'users/usuario_defecto.jpg' %}{% endif %}" width="200px" height="auto">
+        </div>
+        
+        <div>
+            <label for="image-upload" class="upload-btn">Cambiar imagen</label>
+            <input type="file" name="imagen" id="image-upload" accept="image/*" onchange="previewImage(event)">
+        </div>
+        <div class="box-informacion"> 
+                
+            <div class="input">
+                <label for="fistname">Nombre</label>
+                <input type="text" name="first_name" value="{{ user.first_name }}">
+            </div>
+            
+            <div class="input">
+                <label for="lastname">Apellido</label>
+                <input type="text" name="last_name" value="{{ user.last_name }}">
+            </div>
+            <div class="input">
+                <label for="email">Email</label>
+                <input type="text" name="email" value="{{ user.email }}" >
+            </div>
+            <div class="input">
+                <label for="telefono">Teléfono</label>
+                <input type="number" name="telephone" value="{{ profile.telephone }}" >
+            </div>
+            <div class="input">
+                <label for="address">Dirección</label>
+                <input type="text" name="address" value="{{ profile.address }}" >
+            </div>
+        </div>
+        <input type="submit" value="Guardar" style="display: none;" id="guardar-btn">
+        <input type="button" value="Cancelar" id="Cancelar-btn" style="display: none;" onclick="location.href='{% url 'user_profile' %}'">
+        </form>
+    </div>
+</div>
+
+<script>
+    const inputs = document.querySelectorAll('input[type="text"], input[type="number"], input[type="file"]');
+    const guardarBtn = document.getElementById('guardar-btn');
+    const cancelarBtn = document.getElementById('Cancelar-btn');
+
+    inputs.forEach(input => {
+        input.addEventListener('input', () => {
+            guardarBtn.style.display = 'block'; // Mostrar el botón de guardar cuando se escribe en algún input
+        });
+    });
+    inputs.forEach(input => {
+        input.addEventListener('input', () => {
+            cancelarBtn.style.display = 'block'; // Mostrar el botón de guardar cuando se escribe en algún input
+        });
+    });
+    function previewImage(event) {
+    const input = event.target;
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('profile-image').src = e.target.result;
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+</script>
 {% endblock %}

@@ -47,6 +47,7 @@ class Reserva(models.Model):
     fechaReserva = models.DateField(auto_now_add=True,verbose_name='Fecha de reserva')
     fechaCheckIn = models.DateField(verbose_name='Fecha de check in')
     fechaCheckOut = models.DateField(verbose_name='Fecha de check out')
+    numPersonas = models.PositiveIntegerField(default=7, verbose_name='Personas')
 
     def __str__(self):
         return f"{self.cabana} - {self.usuario}"

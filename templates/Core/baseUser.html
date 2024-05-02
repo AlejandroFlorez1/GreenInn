@@ -390,7 +390,11 @@ main.min-main{
             <br>    
                 <div class="usuario"> 
                     {%block user%}{%endblock%}
-                    <img src="{{ profile.image.url }}" alt=""> 
+                    {% if profile.image %}
+                        <img src="{{ profile.image.url }}" alt="">
+                    {%else%}
+                        <img src="{% static 'imagenes/user.png' %}" alt="">
+                    {% endif %} 
                     
                     <div class="info-usuario">
                         <div class="nombre-email">
@@ -443,19 +447,6 @@ main.min-main{
         }
     });
     
-    palanca.addEventListener("click",()=>{
-        let body = document.body;
-        body.classList.toggle("dark-mode");
-        body.classList.toggle("");
-        circulo.classList.toggle("prendido");
-    });
     
-    cloud.addEventListener("click",()=>{
-        barraLateral.classList.toggle("mini-barra-lateral");
-        main.classList.toggle("min-main");
-        spans.forEach((span)=>{
-            span.classList.toggle("oculto");
-        });
-    });
     </script>
 </body>

@@ -124,23 +124,31 @@ input[type="submit"]:hover {
 }
 </style>
     <body>
+        <div>
+        <div>
+            <div>
+                <label for="FechaEntrada">Fecha de Entrada</label>
+                
+            </div>
+        </div>
         <div class="container1">
-            <form action="" method="POST">
+            <form action="" method="POST" value="buscar">
                 {% csrf_token %}
-                <input type="date" name="dateEntrada" id="dateEntrada" placeholder="Fecha Entrada">
-                <input type="date" name="dateSalida" id="dateSalida" placeholder="Fecha Salida">
+                {{fechas.fechaEntrada}}
+                <input type="date" name="dateEntrada" id="dateEntrada" placeholder="Fecha Entrada"  value="{{ fechas.fechaEntrada }}" >
+                <input type="date" name="dateSalida" id="dateSalida" placeholder="Fecha Salida"  value="{{ fechas.fechaSalida }}">
                 <select name="cabaña" id="">
-                    <option value="">Cabaña</option>
-                    {% for cabania in cabanias %}
-                    <option value="{{ cabania.id }}">{{ cabania }}</option>
+                    {% for cabaña in cabañas %}
+                    <option value="{{ cabaña.id }}">{{ cabaña.nomCabaña }}</option>
                     {% endfor %}
                 </select>
                 <input type="submit" value="Buscar">
 
             </form>
         </div>
+        </div>
         <h3 id="selectedDates">Fechas seleccionadas:</h3>
-    
+        <div>
         <div class="calendar">
             <div class="calendar-header">
                 <button id="prevBtn" class="calendar-btn"><i class="fas fa-angle-left"></i></button>
@@ -149,7 +157,7 @@ input[type="submit"]:hover {
             </div>
             <div id="calendarBody" class="calendar-body"></div>
         </div>
-
+        </div>
         <script>
             var fechas_disponibles_json = '{{ fechas_disponibles_json }}';
             var fechas_disponibles = JSON.parse(fechas_disponibles_json);
@@ -167,6 +175,8 @@ input[type="submit"]:hover {
             let currentYear = currentDate.getFullYear();
             let startDate = null;
             let endDate = null;
+            var fechaEntra ='{{ fechas.fechaEntrada }}';
+            var fechaSale = '{{ fechas.fechaSalida }}';
     
             const calendarBody = document.getElementById('calendarBody');
             const currentMonthElement = document.getElementById('currentMonth');
@@ -239,16 +249,18 @@ input[type="submit"]:hover {
             function updateSelectedDates(){
                 if(startDate && endDate){
                     selectedDatesElement.textContent = `Fechas seleccionadas: ${formatDate(startDate)} - ${formatDate(endDate)}`;
-                    fechaEntrada.value = formatDate(startDate);
-                    fechaSalida.value = formatDate(endDate);
+                        fechaEntrada.value = formatDate(startDate);
+                        fechaSalida.value = formatDate(endDate);
                 } else if (startDate){
                     selectedDatesElement.textContent = `Fechas seleccionadas: ${formatDate(startDate)}`;
                     fechaEntrada.value = formatDate(startDate);
                     fechaSalida.value = '';
                 } else {
                     selectedDatesElement.textContent = `Fechas seleccionadas:`;
+                    if(fechaEntra=='' && fechaSale==''){
                     fechaEntrada.value = '';
                     fechaSalida.value = '';
+                    }
                 }
             }
     
