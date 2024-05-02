@@ -6,8 +6,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout, authenticate, login
 from .models import Reserva
 from accounts.models import Profile
+from .models import Cabaña
 import json
 from django.utils.html import escapejs
+from datetime import datetime
 # Create your views here.
 
 
@@ -74,22 +76,67 @@ def User_Historial_Reservas(request):
     return render (request, 'Core/UserHistorialReservas.html', {'reservas': reservas})
 
 def User_Hacer_Reserva(request):
-    profile = Profile.objects.get(user=request.user)
-    reservas = Reserva.objects.filter(id=1)
-    fechas_disponibles = []
+    if request.method == 'POST':
+            form = request.POST.get('form')
+            cabañas = Cabaña.objects.all()
+            id_cabaña = request.POST.get('cabaña')   
+            profile = Profile.objects.get(user=request.user)
+            reservas = Reserva.objects.filter(id=id_cabaña)
+            fechas_disponibles = []
+            fechas={}
+            fechaEntrada_str = request.POST.get('dateEntrada')
+            fechaSalida_str = request.POST.get('dateSalida')
+            if fechaEntrada_str and fechaSalida_str:
+                fechaEntrada = datetime.strptime(fechaEntrada_str, '%Y-%m-%d')
+                fechaSalida = datetime.strptime(fechaSalida_str, '%Y-%m-%d')
 
-    for reserva in reservas:
-        rango_fechas = range(reserva.fechaCheckIn.day, reserva.fechaCheckOut.day + 1)
-        mes_reserva = reserva.fechaCheckIn.strftime('%m') 
-        fechas_disponibles.extend([(dia, mes_reserva) for dia in rango_fechas])
+                # Formatear las fechas según el formato YYYY-MM-DD
+                fechaEntrada_fmt = fechaEntrada.strftime('%Y-%m-%d')
+                fechaSalida_fmt = fechaSalida.strftime('%Y-%m-%d')
+                fechas={
+                    'fechaEntrada': fechaEntrada_fmt,
+                    'fechaSalida': fechaSalida_fmt
+                }
 
-    fechas_disponibles = set(fechas_disponibles)
-    fechas_disponibles = sorted(fechas_disponibles)
-    fechas_disponibles_json = escapejs(json.dumps(fechas_disponibles))
-    
-    return render(request, 'Core/UserHacerReserva.html', {'fechas_disponibles_json': fechas_disponibles_json, 'profile': profile})
+            for reserva in reservas:
+                rango_fechas = range(reserva.fechaCheckIn.day, reserva.fechaCheckOut.day + 1)
+                mes_reserva = reserva.fechaCheckIn.strftime('%m') 
+                fechas_disponibles.extend([(dia, mes_reserva) for dia in rango_fechas])
+
+            fechas_disponibles = set(fechas_disponibles)
+            fechas_disponibles = sorted(fechas_disponibles)
+            fechas_disponibles_json = escapejs(json.dumps(fechas_disponibles))        
+            return render(request, 'Core/UserHacerReserva.html', {'fechas_disponibles_json': fechas_disponibles_json, 'profile': profile, 'cabañas': cabañas, 'fechas': fechas}, )
+        
+    else:
+        fechas_disponibles = []
+        fechas_disponibles = set(fechas_disponibles)
+        fechas_disponibles = sorted(fechas_disponibles)
+        fechas_disponibles_json = escapejs(json.dumps(fechas_disponibles))   
+        user_log = request.user
+        profile = Profile.objects.get(user=user_log)
+        cabañas = Cabaña.objects.all()
+        return render(request, 'Core/UserHacerReserva.html', {'profile': profile, 'fechas_disponibles_json': fechas_disponibles_json, 'cabañas': cabañas})
 
 def User_Profile(request):
-    user_log = request.user
-    profile = Profile.objects.get(user=user_log)
-    return render (request, 'Core/UserPerfil.html', {'profile': profile})
+    if request.method == 'POST':
+        user_log = request.user
+        profile = Profile.objects.get(user=user_log)
+        nombre = request.POST.get('first_name')
+        apellido = request.POST.get('last_name')
+        if nombre:
+            user_log.first_name = nombre
+        if apellido:
+            user_log.last_name = apellido     
+        profile.telephone = request.POST.get('telephone')
+        profile.address = request.POST.get('address')
+        image = request.FILES.get('imagen')
+        if image:            
+            profile.image = image
+        user_log.save()
+        profile.save()
+        return render (request, 'Core/UserPerfil.html', {'profile': profile})
+    else:
+        user_log = request.user
+        profile = Profile.objects.get(user=user_log)
+        return render (request, 'Core/UserPerfil.html', {'profile': profile})
