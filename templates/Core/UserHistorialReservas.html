@@ -1,0 +1,42 @@
+{% extends 'Core/baseUser.html' %}
+{% load static %}
+{% block body %}
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+</style>
+
+    <h1>Historial Reservas</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Cabaña</th>
+                <th>Fecha de Reserva</th>
+                <th>Fecha de Check In</th>
+                <th>Fecha de Check Out</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reserva in reservas %}
+                <tr>
+                    <td>{{ reserva.cabana }}</td>
+                    <td>{{ reserva.fechaReserva }}</td>
+                    <td>{{ reserva.fechaCheckIn }}</td>
+                    <td>{{ reserva.fechaCheckOut }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
