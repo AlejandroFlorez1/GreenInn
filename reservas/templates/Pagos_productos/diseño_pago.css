@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap');
 
 :root {
-    --clr-main: #2CBE56;
+    --clr-main: #2a9d58;
     --clr-main-light: #2a9d58;
     --clr-white: #ececec;
     --clr-gray: #e2e2e2;
@@ -267,6 +267,7 @@ main {
     border-top-right-radius: 1rem;
     border-bottom-right-radius: 1rem;
 }
+
 
 .header-mobile {
     display: none;
