@@ -16,6 +16,42 @@
     th {
         background-color: #f2f2f2;
     }
+    .detalle-link {
+    display: inline-block;
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 20px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.detalle-link:hover {
+    background-color: #45a049;
+}
+.eliminar-form {
+    display: inline; /* Para que el formulario y el botón estén en línea */
+}
+
+.eliminar-button {
+    background-color: #f44336; /* Color de fondo rojo */
+    color: white; /* Color del texto blanco */
+    border: none; /* Sin borde */
+    padding: 10px 20px; /* Espaciado interno */
+    text-align: center; /* Alinear el texto al centro */
+    text-decoration: none; /* Sin subrayado */
+    display: inline-block; /* Para que el botón ocupe solo el ancho necesario */
+    font-size: 16px; /* Tamaño de fuente */
+    margin: 4px 2px; /* Margen */
+    cursor: pointer; /* Cambiar el cursor al pasar el ratón */
+    border-radius: 4px; /* Bordes redondeados */
+    transition-duration: 0.4s; /* Duración de la transición */
+}
+
+.eliminar-button:hover {
+    background-color: #c62828; /* Cambiar el color de fondo al pasar el ratón */
+}
 </style>
 
     <h1>Historial Reservas</h1>
@@ -26,6 +62,9 @@
                 <th>Fecha de Reserva</th>
                 <th>Fecha de Check In</th>
                 <th>Fecha de Check Out</th>
+                <th>Estado</th>
+                <th></th>
+
             </tr>
         </thead>
         <tbody>
@@ -35,6 +74,12 @@
                     <td>{{ reserva.fechaReserva }}</td>
                     <td>{{ reserva.fechaCheckIn }}</td>
                     <td>{{ reserva.fechaCheckOut }}</td>
+                    <td>{{ reserva.estado }}</td>
+                    <td><a class="detalle-link" href="{% url 'detalle_reserva' reserva.id %}">Ver detalle</a>
+                    <form action="{% url 'eliminar_reserva' reserva.id %}" method="post" class="eliminar-form">
+                        {% csrf_token %}
+                        <button class="eliminar-button" type="submit">Eliminar reserva</button>
+                    </form>
                 </tr>
             {% endfor %}
         </tbody>

@@ -366,7 +366,7 @@ main.min-main{
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="{% url 'User_Historial_Reservas' %}">
                         <ion-icon name="apps-outline"></ion-icon>
                         <span>Mis Reservas</span>
                     </a>
@@ -415,6 +415,7 @@ main.min-main{
     <main>
         {% block body%}{% endblock %}
     </main>
+    {% block carrito%}{% endblock %}
 
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>

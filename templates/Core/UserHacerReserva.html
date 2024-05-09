@@ -105,12 +105,13 @@
 
 input[type="date"],
 select,
-input[type="submit"] {
+input[type="submit"], input[type="number"], input[type="text"] {
     margin: 10px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
+    width: 10vw;
 }
 
 input[type="submit"] {
@@ -122,41 +123,89 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background-color: #0056b3;
 }
+.input_container{
+    display: inline-block;
+    width: 150px; 
+    text-align: right; 
+    margin-right: 10px;
+}
+.main_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10vh;
+}
+.informacion_reserva{
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
 </style>
     <body>
         <div>
-        <div>
-            <div>
-                <label for="FechaEntrada">Fecha de Entrada</label>
-                
-            </div>
-        </div>
         <div class="container1">
-            <form action="" method="POST" value="buscar">
+            <form action="" method="POST">
                 {% csrf_token %}
-                {{fechas.fechaEntrada}}
                 <input type="date" name="dateEntrada" id="dateEntrada" placeholder="Fecha Entrada"  value="{{ fechas.fechaEntrada }}" >
                 <input type="date" name="dateSalida" id="dateSalida" placeholder="Fecha Salida"  value="{{ fechas.fechaSalida }}">
+                <input type="number" name="numPersonas" id="numPersonas" placeholder="Número de personas" style="width: auto;" min="1" max="7" value="{{ datos.numPersonas }}">
                 <select name="cabaña" id="">
                     {% for cabaña in cabañas %}
                     <option value="{{ cabaña.id }}">{{ cabaña.nomCabaña }}</option>
                     {% endfor %}
                 </select>
-                <input type="submit" value="Buscar">
+                <input type="submit" value="Buscar" name="form">
 
             </form>
         </div>
         </div>
-        <h3 id="selectedDates">Fechas seleccionadas:</h3>
-        <div>
-        <div class="calendar">
-            <div class="calendar-header">
-                <button id="prevBtn" class="calendar-btn"><i class="fas fa-angle-left"></i></button>
-                <h2 id="currentMonth"></h2>
-                <button id="nextBtn" class="calendar-btn"><i class="fas fa-angle-right"></i></button>
+        
+        <div class="main_container">
+                <div class="informacion_reserva">
+                    <form action="" method="POST" >
+                    {% csrf_token %}
+                    <h1>Información de la Reserva</h1>
+                    <div>
+                        <label class="input_container" for="FechaEntrada">Fecha de Entrada</label>
+                        <input type="date" name="FecEntrada" id="fecEntrada" readonly value="{{ fechas.fechaEntrada }}">
+                    </div>                
+                    <div>
+                        <label class="input_container" for="fechaSalida">Fecha de Salida </label>
+                        <input type="date" name="FecSalida" id="fecSalida" readonly value="{{ fechas.fechaSalida }}">
+                    </div>
+                    <div>
+                        <label  class="input_container" for="NumPersonas">Número de Personas</label>
+                        <input type="number" name="NumPersonas" id="NumPersonas" readonly value="{{ datos.numPersonas}}">
+                    </div>
+                    <div>
+                        <label class="input_container" for="Cabaña">Cabaña</label>
+                        <input type="text" name="Cabaña" id="Cabaña" readonly value="{{ datos.cabaña }}">
+                    </div>
+                    <div style="display: none;">
+                        <input type="number" name="id_cabaña" id="" readonly value="{{ datos.id_cabaña }}">
+                    </div>
+                    <div>
+                        <label class="input_container" for="subTotal">Subtotal</label>
+                        <input type="text" name="subTotal" id="subTotal" readonly value="{{ datos.subtotal }}">
+                    </div>
+                    <div>
+                        <label class="input_container" for="total">total</label>
+                        <input type="text" name="total" id="total" readonly value="{{ datos.total }}">
+                    </div>
+                    <div>
+                        <input type="submit" {%if datos.disponible %}
+                        value="Reservar" name="form" {% else %} value="No Disponible" style="pointer-events: none;" {%endif %}>
+                    </div>
+                    </form>
+                </div>
+        
+            <div class="calendar">
+                <div class="calendar-header">
+                    <button id="prevBtn" class="calendar-btn"><i class="fas fa-angle-left"></i></button>
+                    <h2 id="currentMonth"></h2>
+                    <button id="nextBtn" class="calendar-btn"><i class="fas fa-angle-right"></i></button>
+                </div>
+                <div id="calendarBody" class="calendar-body"></div>
             </div>
-            <div id="calendarBody" class="calendar-body"></div>
-        </div>
         </div>
         <script>
             var fechas_disponibles_json = '{{ fechas_disponibles_json }}';
@@ -164,6 +213,7 @@ input[type="submit"]:hover {
             fechas_disponibles.forEach(function(fecha) {
             console.log('Día:', fecha[0], ', Mes:', fecha[1]);
             });
+            console.log({{datos.disponible}});
         </script>
 
 
@@ -236,10 +286,13 @@ input[type="submit"]:hover {
                 if (!startDate || endDate){
                     startDate = clickedDate;
                     endDate = null;
+                    fechaEntrada.value = formatDate(startDate);
                 } else if (clickedDate < startDate){
                     startDate = clickedDate;
+                    fechaEntrada.value = formatDate(startDate);
                 } else if (clickedDate > startDate){
                     endDate = clickedDate;
+                    fechaSalida.value = formatDate(endDate);
                 }
     
                 renderCalendar();

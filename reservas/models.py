@@ -59,7 +59,7 @@ class Reserva(models.Model):
 class Pedido(models.Model):
     Reserva = models.ForeignKey(Reserva, on_delete=models.CASCADE, related_name='Reserva_pedido', verbose_name='Reserva')
     estado = models.ForeignKey(Estado, on_delete=models.CASCADE, verbose_name='Estado')
-    fechaHora = models.DateTimeField(auto_now_add=True, verbose_name='Fecha y hora')
+    
 
     def __str__(self):
         return f"{self.Reserva} - {self.estado}"
@@ -90,7 +90,7 @@ class Producto(models.Model):
 class Pedido_Producto(models.Model):
     pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE, verbose_name='Pedido')
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE, verbose_name='producto')
-
+    fechaHora = models.DateTimeField(auto_now_add=True, verbose_name='Fecha y hora')
     def __str__(self):
         return f"{self.pedido} - {self.producto}"
     
