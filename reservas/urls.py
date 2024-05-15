@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import home, Acercade, Cabañas, Restaurante, login_view, exit, inicio, User_Reservas, User_Historial_Reservas, User_Hacer_Reserva, User_Profile, User_Detalle_Reserva, User_Eliminar_Reserva    
+from .views import home, Acercade, Cabañas, Restaurante, login_view, exit, inicio, User_Reservas, User_Historial_Reservas, User_Hacer_Reserva, User_Profile, User_Detalle_Reserva, User_Eliminar_Reserva, Productos_Desayuno   
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
@@ -19,6 +19,7 @@ urlpatterns = [
     path('Profile/', User_Profile, name='user_profile'),
     path('reserva/<int:id_reserva>/', User_Detalle_Reserva , name='detalle_reserva'),
     path('reserva/<int:reserva_id>/eliminar/', User_Eliminar_Reserva, name='eliminar_reserva'),
+    path('productos_Desayuno/', Productos_Desayuno, name='productosDesayuno'),
 ]
 
 

@@ -1,0 +1,50 @@
+{% extends 'PagosProductos/main_Pago.html' %}
+
+{% load static %}
+{% block desayuno %}
+active
+{% endblock %}
+{%block content%}
+{%for producto in productos%}
+<style>
+    .producto{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 5px;
+    }
+    .producto-detalles{
+        width: 15vw;
+        height: 50vh;
+        display: flex;
+        flex-direction: column;
+    }
+    .producto-descripcion{
+        height: 10vh;
+    }
+    img{
+        left: 50%;
+        right: 50%;
+        align-items: center;
+    }
+    .contenedor-imagen{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+</style>
+<div class="producto">
+    <div class="producto-detalles">
+        <div class="contenedor-imagen">
+            <h3 class="producto-titulo">{{producto.nomProducto}}</h3>   
+            <img src="{{ producto.imagen.url }}" alt="" style="height: 150px; width: 150px; right: 50;">
+        </div>
+        <p class="producto-precio">${{producto.precio}}</p>
+        <p class="producto-descripcion">{{producto.descripcion}}</p>
+        <button class="producto-agregar">Agregar</button>
+    </div>
+</div>
+{%endfor%}
+{%endblock%}

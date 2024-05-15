@@ -192,8 +192,10 @@ input[type="submit"]:hover {
                         <input type="text" name="total" id="total" readonly value="{{ datos.total }}">
                     </div>
                     <div>
+
                         <input type="submit" {%if datos.disponible %}
                         value="Reservar" name="form" {% else %} value="No Disponible" style="pointer-events: none;" {%endif %}>
+                      
                     </div>
                     </form>
                 </div>
@@ -213,7 +215,6 @@ input[type="submit"]:hover {
             fechas_disponibles.forEach(function(fecha) {
             console.log('Día:', fecha[0], ', Mes:', fecha[1]);
             });
-            console.log({{datos.disponible}});
         </script>
 
 

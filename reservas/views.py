@@ -4,13 +4,14 @@ from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout, authenticate, login
-from .models import Reserva
+from .models import Reserva, Producto
 from accounts.models import Profile
 from .models import Cabaña
 import json
 from django.utils.html import escapejs
 from datetime import datetime
 from django.utils import timezone
+from .decorators import login_required
 
 # Create your views here.
 
@@ -63,22 +64,26 @@ def Restaurante(request):
 def inicio(request):
     user_log = request.user
     profile = Profile.objects.get(user=user_log)
-
+    Reservas = Reserva.objects.filter(usuario=user_log)
     contexto = {
         'profile': profile,
         'user': user_log,
+        'reservas': Reservas
     }
     return render (request, 'Core/UserInicio.html', contexto)
 
+@login_required
 def User_Reservas(request):
     return render (request, 'Core/UserReservas.html')
 
+@login_required
 def User_Historial_Reservas(request):
     reservas = Reserva.objects.filter(usuario=request.user)
     user_log = request.user
     profile = Profile.objects.get(user=user_log)
     return render (request, 'Core/UserHistorialReservas.html', {'reservas': reservas, 'profile': profile})
 
+@login_required
 def User_Hacer_Reserva(request):
     if request.method == 'POST':        
         form = request.POST.get('form')
@@ -121,13 +126,15 @@ def User_Hacer_Reserva(request):
             subtotal = (numPersonas * 50000) + precioCabaña*diferencia_dias
             total = subtotal*0.19 + subtotal
             disponible = True;
-            for reserva in reservas:
-                if reserva.fechaCheckIn <= fechaEntrada < reserva.fechaCheckOut or reserva.fechaCheckIn <= fechaSalida < reserva.fechaCheckOut:
+            reser = Reserva.objects.filter(cabana=id_cabaña)
+            for reserva in reser:
+                if fechaEntrada >= reserva.fechaCheckIn and fechaEntrada <= reserva.fechaCheckOut or fechaSalida >= reserva.fechaCheckIn and fechaSalida <= reserva.fechaCheckOut:
                     disponible = False
                     print("No disponible")
                     break
             
             datos = {
+                'reservas': reser,
                 'numPersonas': numPersonas,
                 'cabaña': cabaña,
                 'subtotal': subtotal,
@@ -158,7 +165,12 @@ def User_Hacer_Reserva(request):
             reserva.save()
             user_log = request.user
             profile = Profile.objects.get(user=user_log)
-            return render(request, 'Core/UserInicio.html', {'profile': profile})    
+            fechas_disponibles = []
+            fechas_disponibles = set(fechas_disponibles)
+            fechas_disponibles = sorted(fechas_disponibles)
+            fechas_disponibles_json = escapejs(json.dumps(fechas_disponibles)) 
+            cabañas = Cabaña.objects.all()  
+            return render(request, 'Core/UserHacerReserva.html', {'profile': profile, 'fechas_disponibles_json': fechas_disponibles_json, 'cabañas': cabañas})
         else:
             fechas_disponibles = []
             fechas_disponibles = set(fechas_disponibles)
@@ -203,7 +215,7 @@ def User_Profile(request):
     
 def User_Detalle_Reserva(request, id_reserva):
     reserva= get_object_or_404(Reserva, pk=id_reserva)
-    return render(request, 'PagosProductos/main_Pago.html', {'reserva': reserva})
+    return render(request, 'Core/UserDetalleReserva.html', {'reserva': reserva})
 
 def User_Eliminar_Reserva(request, reserva_id):
     # Obtener la reserva por su ID
@@ -217,3 +229,7 @@ def User_Eliminar_Reserva(request, reserva_id):
 
     # Si no es una solicitud POST, renderizar un mensaje de error
     return render(request, 'Core/UserHistorialReservas.html', {'mensaje': 'Solicitud no válida'})
+
+def Productos_Desayuno(request):
+    productos=Producto.objects.all()
+    return render(request, 'Core/tienda/productosDesayuno.html', {'productos': productos})
