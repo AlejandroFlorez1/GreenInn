@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Out</title>
+    <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+    <div class="container">
+        <h2>Check Out</h2>
+        <p>Gracias por alojarse con nosotros. Por favor, complete el proceso de check out:</p>
+    
+        <p>Nombre: <span id="nombre"></span></p>
+        <p>Apellido: <span id="apellido"></span></p>
+        <p>Cantidad de Personas: <span id="can"></span></p>
+        <p>Objetos Consumidos: <span id="con"></span></p>
+        <button class="button">Confirmar Check Out</button>
+        <a href="n.html" class="button retorno-button">Inicio</a>
+    </div>
+
+    <script>
+        var nombre = localStorage.getItem('nombre');
+        var apellido = localStorage.getItem('apellido');
+        var can = localStorage.getItem('can');
+        var con = localStorage.getItem('con');
+        document.getElementById('nombre').textContent = nombre;
+        document.getElementById('apellido').textContent = apellido;
+        document.getElementById('can').textContent = can;
+        document.getElementById('con').textContent = con;
+    </script>
+</body>
+</html>

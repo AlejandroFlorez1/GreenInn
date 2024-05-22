@@ -1,0 +1,104 @@
+{%extends 'Core/recepcionista/baseRecepcionista.html' %}
+
+{%block content%}
+<style>
+    .content {
+        display: flex;
+    }
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 5px;
+        text-align: center;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+            text-align: left;
+        }
+        .btn-ver-mas {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 10px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .btn-ver-mas:hover {
+            background-color: #0056b3;
+        }
+</style>
+
+<div class="content">
+    <div class="container">
+    
+    {% if pedidos_espera %}
+    <h1>Pedidos en Espera</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Cliente</th>
+                <th>Cabaña</th>
+                <th>Reserva</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pedido in pedidos_espera %}
+                <tr>
+                    <td>{{ pedido.id }}</td>
+                    <td>{{ pedido.Reserva.usuario.username }}</td>
+                    <td>{{ pedido.Reserva.cabana.nomCabaña }}</td>
+                    <td>{{ pedido.Reserva.id }}</td>
+                    <td><a href="{% url 'entregar_pedido' pedido.id %}" class="btn-ver-mas">Ver más</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else%}
+    <p>No hay pedidos en espera</p>
+    {% endif %}
+    </div>
+    <div class="container">
+    {% if pedidos_entregado %}
+    <h1>Pedidos Entregados</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Cliente</th>
+                <th>Cabaña</th>
+                <th>Reserva</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pedido in pedidos_entregado %}
+                <tr>
+                    <td>{{ pedido.id }}</td>
+                    <td>{{ pedido.Reserva.usuario.username }}</td>
+                    <td>{{ pedido.Reserva.cabana.nomCabaña }}</td>
+                    <td>{{ pedido.Reserva.id }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>{% else%}
+    <p>No hay pedidos entregados</p>
+    {% endif %}
+    </div>
+
+</div>
+{%endblock%}

@@ -7,4 +7,4 @@ def login_required(view_func):
             return redirect(reverse('login')) 
         return view_func(request, *args, **kwargs)
 
-    return wrapper
+    return wrapper  

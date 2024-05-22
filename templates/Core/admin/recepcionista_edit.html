@@ -1,0 +1,26 @@
+{%extends 'Core/admin/inicioAdmin.html' %}
+{% load static %}
+
+{% block content %}
+<!-- recepcionistas/recepcionista_edit.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Recepcionista</title>
+</head>
+<body>
+    <h1>Edit Recepcionista</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ user_form.as_p }}
+        {{ profile_form.as_p }}
+        <button type="submit">Save</button>
+        <a href="{% url 'recepcionista_view' %}">Cancel</a>
+    </form>
+</body>
+</html>
+
+{% endblock %}

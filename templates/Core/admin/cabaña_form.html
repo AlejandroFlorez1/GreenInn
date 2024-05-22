@@ -1,0 +1,20 @@
+{%extends 'Core/admin/inicioAdmin.html' %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% if cabaña %}Editar Cabaña{% else %}Agregar Cabaña{% endif %}</title>
+</head>
+<body>
+    <h1>{% if cabaña %}Editar Cabaña{% else %}Agregar Cabaña{% endif %}</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar</button>
+    </form>
+</body>
+</html>
+
+{% endblock %}

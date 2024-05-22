@@ -81,16 +81,23 @@ class Producto(models.Model):
 
     def __str__(self):
         return self.nomProducto
-    
+
+    def reducir_cantidad(self, cantidad_reducir):
+        if self.cantidad  >= cantidad_reducir:
+            self.cantidad -= cantidad_reducir
+            self.save()
+        else:
+            raise ValueError("No hay suficiente stock para reducir esta cantidad.")
+
     class Meta:
         verbose_name = 'producto'
         verbose_name_plural = 'productos'
-
 #Pedido_Producto
 class Pedido_Producto(models.Model):
     pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE, verbose_name='Pedido')
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE, verbose_name='producto')
     fechaHora = models.DateTimeField(auto_now_add=True, verbose_name='Fecha y hora')
+    cantidad = models.PositiveIntegerField(default=1, verbose_name='Cantidad')
     def __str__(self):
         return f"{self.pedido} - {self.producto}"
     
@@ -118,7 +125,7 @@ class Factura(models.Model):
 
 
     def __str__(self):
-        return f"{self.pedido} - {self.metodo}"
+        return f"{self.Reserva} - {self.metodo}"
     
     class Meta:
         verbose_name = 'factura'

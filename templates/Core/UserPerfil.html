@@ -2,6 +2,9 @@
 {% load static %}
 {% block body %}
 <style>
+    body{
+        background-color: #c0ccd9;
+    }
     .información {
         display: flex;
         flex-direction: column;
@@ -51,6 +54,7 @@
         border-radius: 50%; /* Borde redondeado para hacer un círculo */
         overflow: hidden; /* Para ocultar partes de la imagen que se salgan del círculo */
         margin-bottom: 5vh;
+        border: 2px solid white;
 
     }
     .upload-btn {
@@ -74,6 +78,38 @@
     .input input[type="number"]:hover {
         caret-color: white !important; /* Cambia el color del cursor al pasar sobre el input */
     }
+    button, input[type="submit"], input[type="button"] {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+/* Estilo específico para el botón Guardar */
+#guardar-btn {
+    background-color: #808080; /* Gris medio */
+    color: white;
+}
+
+#guardar-btn:hover {
+    background-color: #696969; /* Gris más oscuro */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo específico para el botón Cancelar */
+#Cancelar-btn {
+    background-color: #B0B0B0; /* Gris claro */
+    color: white;
+}
+
+#Cancelar-btn:hover {
+    background-color: #A0A0A0; /* Gris ligeramente más oscuro */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 </style>
 <div>
     <div class="información">

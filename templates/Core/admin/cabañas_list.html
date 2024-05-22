@@ -1,0 +1,60 @@
+{%extends 'Core/admin/inicioAdmin.html' %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cabañas</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            border: none;
+        }
+        th, td {
+            border: none;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        a {
+            text-decoration: none;
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <h1>Listado de Cabañas</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Personas Máximas</th>
+                <th>Precio</th>
+                <th>Descripción</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cabaña in cabañas %}
+            <tr>
+                <td>{{ cabaña.nomCabaña }}</td>
+                <td>{{ cabaña.perMax }}</td>
+                <td>{{ cabaña.precio }}</td>
+                <td>{{ cabaña.descripcion }}</td>
+                <td>
+                    <a href="{% url 'cabaña_update' cabaña.pk %}">Editar</a> | 
+                    <a href="{% url 'cabaña_delete' cabaña.pk %}">Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'cabaña_create' %}">Agregar Cabaña</a>
+</body>
+</html>
+
+{% endblock %}

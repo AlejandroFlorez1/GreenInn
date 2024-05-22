@@ -1,0 +1,208 @@
+// stylelint-disable selector-no-qualifying-type
+
+//
+// Base styles
+//
+
+.input-grupo {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap; // For form validation feedback
+  align-items: stretch;
+  width: 100%;
+
+  > .form-control,
+  > .form-control-plaintext,
+  > .custom-select,
+  > .custom-file {
+    position: relative; // For focus state's z-index
+    flex: 1 1 auto;
+    width: 1%;
+    min-width: 0; // https://stackoverflow.com/questions/36247140/why-dont-flex-items-shrink-past-content-size
+    margin-bottom: 0;
+
+    + .form-control,
+    + .custom-select,
+    + .custom-file {
+      margin-left: -$input-border-width;
+    }
+  }
+
+  // Bring the "active" form control to the top of surrounding elements
+  > .form-control:focus,
+  > .custom-select:focus,
+  > .custom-file .custom-file-input:focus ~ .custom-file-label {
+    z-index: 3;
+  }
+
+  // Bring the custom file input above the label
+  > .custom-file .custom-file-input:focus {
+    z-index: 4;
+  }
+
+  > .form-control,
+  > .custom-select {
+    &:not(:first-child) { @include border-left-radius(0); }
+  }
+
+  // Custom file inputs have more complex markup, thus requiring different
+  // border-radius overrides.
+  > .custom-file {
+    display: flex;
+    align-items: center;
+
+    &:not(:last-child) .custom-file-label,
+    &:not(:first-child) .custom-file-label { @include border-left-radius(0); }
+  }
+
+  &:not(.has-validation) {
+    > .form-control:not(:last-child),
+    > .custom-select:not(:last-child),
+    > .custom-file:not(:last-child) .custom-file-label::after {
+      @include border-right-radius(0);
+    }
+  }
+
+  &.has-validation {
+    > .form-control:nth-last-child(n + 3),
+    > .custom-select:nth-last-child(n + 3),
+    > .custom-file:nth-last-child(n + 3) .custom-file-label::after {
+      @include border-right-radius(0);
+    }
+  }
+}
+
+
+// Prepend and append
+//
+// While it requires one extra layer of HTML for each, dedicated prepend and
+// append elements allow us to 1) be less clever, 2) simplify our selectors, and
+// 3) support HTML5 form validation.
+
+.input-grupo-prepend,
+.input-grupo-append {
+  display: flex;
+
+  // Ensure buttons are always above inputs for more visually pleasing borders.
+  // This isn't needed for `.input-grupo-text` since it shares the same border-color
+  // as our inputs.
+  .btn {
+    position: relative;
+    z-index: 2;
+
+    &:focus {
+      z-index: 3;
+    }
+  }
+
+  .btn + .btn,
+  .btn + .input-grupo-text,
+  .input-grupo-text + .input-grupo-text,
+  .input-grupo-text + .btn {
+    margin-left: -$input-border-width;
+  }
+}
+
+.input-grupo-prepend { margin-right: -$input-border-width; }
+.input-grupo-append { margin-left: -$input-border-width; }
+
+
+// Textual addons
+//
+// Serves as a catch-all element for any text or radio/checkbox input you wish
+// to prepend or append to an input.
+
+.input-grupo-text {
+  display: flex;
+  align-items: center;
+  padding: $input-padding-y $input-padding-x;
+  margin-bottom: 0; // Allow use of <label> elements by overriding our default margin-bottom
+  @include font-size($input-font-size); // Match inputs
+  font-weight: $font-weight-normal;
+  line-height: $input-line-height;
+  color: $input-grupo-addon-color;
+  text-align: center;
+  white-space: nowrap;
+  background-color: $input-grupo-addon-bg;
+  border: $input-border-width solid $input-grupo-addon-border-color;
+  @include border-radius($input-border-radius);
+
+  // Nuke default margins from checkboxes and radios to vertically center within.
+  input[type="radio"],
+  input[type="checkbox"] {
+    margin-top: 0;
+  }
+}
+
+
+// Sizing
+//
+// Remix the default form control sizing classes into new ones for easier
+// manipulation.
+
+.input-grupo-lg > .form-control:not(textarea),
+.input-grupo-lg > .custom-select {
+  height: $input-height-lg;
+}
+
+.input-grupo-lg > .form-control,
+.input-grupo-lg > .custom-select,
+.input-grupo-lg > .input-grupo-prepend > .input-grupo-text,
+.input-grupo-lg > .input-grupo-append > .input-grupo-text,
+.input-grupo-lg > .input-grupo-prepend > .btn,
+.input-grupo-lg > .input-grupo-append > .btn {
+  padding: $input-padding-y-lg $input-padding-x-lg;
+  @include font-size($input-font-size-lg);
+  line-height: $input-line-height-lg;
+  @include border-radius($input-border-radius-lg);
+}
+
+.input-grupo-sm > .form-control:not(textarea),
+.input-grupo-sm > .custom-select {
+  height: $input-height-sm;
+}
+
+.input-grupo-sm > .form-control,
+.input-grupo-sm > .custom-select,
+.input-grupo-sm > .input-grupo-prepend > .input-grupo-text,
+.input-grupo-sm > .input-grupo-append > .input-grupo-text,
+.input-grupo-sm > .input-grupo-prepend > .btn,
+.input-grupo-sm > .input-grupo-append > .btn {
+  padding: $input-padding-y-sm $input-padding-x-sm;
+  @include font-size($input-font-size-sm);
+  line-height: $input-line-height-sm;
+  @include border-radius($input-border-radius-sm);
+}
+
+.input-grupo-lg > .custom-select,
+.input-grupo-sm > .custom-select {
+  padding-right: $custom-select-padding-x + $custom-select-indicator-padding;
+}
+
+
+// Prepend and append rounded corners
+//
+// These rulesets must come after the sizing ones to properly override sm and lg
+// border-radius values when extending. They're more specific than we'd like
+// with the `.input-grupo >` part, but without it, we cannot override the sizing.
+
+
+.input-grupo > .input-grupo-prepend > .btn,
+.input-grupo > .input-grupo-prepend > .input-grupo-text,
+.input-grupo:not(.has-validation) > .input-grupo-append:not(:last-child) > .btn,
+.input-grupo:not(.has-validation) > .input-grupo-append:not(:last-child) > .input-grupo-text,
+.input-grupo.has-validation > .input-grupo-append:nth-last-child(n + 3) > .btn,
+.input-grupo.has-validation > .input-grupo-append:nth-last-child(n + 3) > .input-grupo-text,
+.input-grupo > .input-grupo-append:last-child > .btn:not(:last-child):not(.dropdown-toggle),
+.input-grupo > .input-grupo-append:last-child > .input-grupo-text:not(:last-child) {
+  @include border-right-radius(0);
+}
+
+.input-grupo > .input-grupo-append > .btn,
+.input-grupo > .input-grupo-append > .input-grupo-text,
+.input-grupo > .input-grupo-prepend:not(:first-child) > .btn,
+.input-grupo > .input-grupo-prepend:not(:first-child) > .input-grupo-text,
+.input-grupo > .input-grupo-prepend:first-child > .btn:not(:first-child),
+.input-grupo > .input-grupo-prepend:first-child > .input-grupo-text:not(:first-child) {
+  @include border-left-radius(0);
+}

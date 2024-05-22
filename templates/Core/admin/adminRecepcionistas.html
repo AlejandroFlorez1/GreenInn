@@ -1,0 +1,61 @@
+{%extends 'Core/admin/inicioAdmin.html' %}
+{% load static %}
+
+{% block content %}
+
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border: none;
+        }
+        th, td {
+            border: none;
+            padding: 8px;
+            text-align: left;
+
+        }
+        .styled-button {
+        background-color: white; /* Color de fondo */
+        border: none; /* Sin borde */
+        color: white; /* Color del texto */
+        padding: 15px 32px; /* Espacio alrededor del texto */
+        text-align: center; /* Alineación del texto */
+        text-decoration: none; /* Sin decoración de texto */
+        display: inline-block; /* Mostrar como un elemento en línea */
+        font-size: 16px; /* Tamaño del texto */
+        margin: 4px 2px; /* Margen */
+        cursor: pointer; /* Cursor al pasar sobre el botón */
+        border-radius: 10px; /* Borde redondeado */
+    }
+    
+    .styled-button:hover {
+        background-color: gainsboro; /* Cambio de color al pasar el ratón */
+    }
+    </style>
+
+    <h1>Recepcionistas</h1>
+    <button class="styled-button"><a href="{% url 'recepcionista_create' %}">Añadir Recepcionista</a></button>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre de usuario</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Perfil</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for recepcionista in recepcionistas %}
+            <tr>
+                <td>{{ recepcionista.username }}</td>
+                <td>{{ recepcionista.first_name }} {{ recepcionista.last_name }}</td>
+                <td>{{ recepcionista.email }}</td>
+                <td><a href="{% url 'recepcionista_edit' recepcionista.username %}">Editar Perfil</a></td>
+                <td><a href="{% url 'recepcionista_delete' recepcionista.username %}">Eliminar</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

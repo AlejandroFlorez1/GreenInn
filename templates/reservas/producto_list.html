@@ -1,0 +1,112 @@
+{%extends 'Core/recepcionista/baseRecepcionista.html' %}
+{% block content %} 
+<style>
+   
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f4f4f4;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-bottom: 5px ;
+}
+</style>
+    <h1>Lista de Productos</h1>
+    <a href="{% url 'producto_create' %}" class="btn">Agregar Nuevo Producto</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre del Producto</th>
+                <th>Precio</th>
+                <th>Descripción</th>
+                <th>Cantidad</th>
+                <th>Imagen</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for producto in productos %}
+                <tr>
+                    <td>{{ producto.nomProducto }}</td>
+                    <td>${{ producto.precio }}</td>
+                    <td>{{ producto.descripcion }}</td>
+                    <td>{{ producto.cantidad }}</td>
+                    <td>
+                        {% if producto.imagen %}
+                            <img src="{{ producto.imagen.url }}" alt="{{ producto.nomProducto }}" width="50">
+                        {% else %}
+                            No image
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{% url 'producto_edit' producto.pk %}" class="btn">Editar</a>
+                        <a href="{% url 'producto_delete' producto.pk %}" class="btn">Eliminar</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+
+{% endblock %}

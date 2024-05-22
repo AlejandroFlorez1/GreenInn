@@ -1,0 +1,92 @@
+{% extends 'PagosProductos/main_Pago.html' %}
+{% load static %}
+{%block categorias%}
+<li>
+    <a href="{% url 'hacerpedido' id_pedido %}" style="text-decoration: none;">
+        <button id="todos" class="boton-menu boton-categoria "><i class="bi bi-hand-index-thumb-fill"></i>Todos los productos</button >
+    </a>
+</li>
+<li>
+    <a href="{% url 'productosDesayuno' id_pedido %}" style="text-decoration: none;">
+        <button id="desayuno" class="boton-menu boton-categoria "><i class="bi bi-hand-index-thumb-fill"></i>Desayuno</button>
+    </a>
+</li>
+<li>
+    <a href="{% url 'productosAlmuerzo' id_pedido %}" style="text-decoration: none;">
+    <button id="almuerzo" class="boton-menu boton-categoria"><i class="bi bi-hand-index-thumb-fill"></i>Almuerzo</button>
+    </a>
+</li>
+<li>
+    <a href="{% url 'productosComidasRapidas' id_pedido %}" style="text-decoration: none;">
+    <button id="rapidas" class="boton-menu boton-categoria"><i class="bi bi-hand-index-thumb-fill"></i>Comidas rapidas</button>
+    </a>
+</li>
+<li>
+    <a href="{% url 'productosSnacks' id_pedido %}" style="text-decoration: none">
+    <button id="snacks" class="boton-menu boton-categoria"><i class="bi bi-hand-index-thumb-fill"></i>Snacks</button></li>
+    </a>
+<li>
+    <a href="{% url 'productosBebidas' id_pedido %}" style="text-decoration: none">
+    <button id="bebidas" class="boton-menu boton-categoria active"><i class="bi bi-hand-index-thumb-fill"></i>Bebidas</button>
+    </a>
+</li>
+{%endblock%}
+{%block content%}
+<style>
+    .producto{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 5px;
+    }
+    .producto-detalles{
+        width: 15vw;
+        height: 60vh;
+        display: flex;
+        flex-direction: column;
+        margin: 2px;
+    }
+    .producto-descripcion{
+        height: 5vh;
+    }
+    img{
+        left: 50%;
+        right: 50%;
+        align-items: center;
+    }
+    .contenedor-imagen{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .cantidad-input {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+</style>
+{%for producto in productos%}
+<form action="" method="post" >
+{% csrf_token %}
+<div class="producto">
+    <div class="producto-detalles">
+        <div class="contenedor-imagen">
+            <h3 class="producto-titulo">{{producto.nomProducto}}</h3>   
+            <img src="{{ producto.imagen.url }}" alt="" style="height: 150px; width: 150px; right: 50;">
+        </div>
+        <p class="producto-precio">${{producto.precio}}</p>
+        <p class="producto-descripcion">{{producto.descripcion}}</p>
+        <label for="cantidad" class="cantidad-label">Cantidad:</label>
+        <input type="number" id="cantidad" name="cantidad" value="1" min="1" class="cantidad-input">
+        <input type="text" name="id" value="{{producto.id}}" style="display: none;">
+        <button class="producto-agregar" type="submit" name="action" value="agregar">Agregar</button>
+    </div>
+</div>
+</form>
+{%endfor%}
+{%endblock%}

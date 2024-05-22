@@ -1,0 +1,14 @@
+{%extends 'Core/recepcionista/baseRecepcionista.html' %}
+
+{%block content%}
+
+    <h1>Confirmar Eliminación</h1>
+    <p>¿Estás seguro que deseas eliminar el producto "{{ object.nomProducto }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Eliminar</button>
+        <a href="{% url 'producto_list' %}">Cancelar</a>
+    </form>
+
+
+{%endblock%}

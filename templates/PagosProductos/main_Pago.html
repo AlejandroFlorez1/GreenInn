@@ -18,28 +18,17 @@
             </header>
             <nav>
                 <ul class="menu">
-                    <li>
-                        <button id="todos" class="boton-menu boton-categoria {% block todos %}{% endblock %}"><i class="bi bi-hand-index-thumb-fill"></i>Todos los productos</button >
-                    </li>
-                    <li>
-                        <a href="{% url 'productosDesayuno' %}" style="text-decoration: none;">
-                            <button id="desayuno" class="boton-menu boton-categoria {% block desayuno %}{% endblock %}"><i class="bi bi-hand-index-thumb-fill"></i>Desayuno</button>
+                    {%block categorias%}{%endblock%}
+                   
+                    <li >
+                        <a class="boton-menu boton-carrito" href="{% url 'carrito' id_pedido%}">
+                        <i class="bi bi-cart-fill"></i>Carrito <span id="numerito" class="numerito">{{total}}  </span>
                         </a>
                     </li>
+                    
                     <li>
-                        <button id="almuerzo" class="boton-menu boton-categoria"><i class="bi bi-hand-index-thumb-fill"></i>Almuerzo</button>
-                    </li>
-                    <li>
-                        <button id="rapidas" class="boton-menu boton-categoria"><i class="bi bi-hand-index-thumb-fill"></i>Comidas rapidas</button>
-                    </li>
-                    <li>
-                        <button id="snacks" class="boton-menu boton-categoria"><i class="bi bi-hand-index-thumb-fill"></i>Snacks</button></li>
-                    <li>
-                        <button id="bebidas" class="boton-menu boton-categoria"><i class="bi bi-hand-index-thumb-fill"></i>Bebidas</button>
-                    </li>
-                    <li>
-                        <a class="boton-menu boton-carrito" href="carrito_pago.html">
-                        <i class="bi bi-cart-fill"></i>Carrito <span id="numerito" class="numerito">0  </span>
+                        <a class="boton-menu boton-carrito" href="{% url 'User_Historial_Reservas'%}">
+                        <i class="bi bi-box-arrow-left"></i>Salir   
                         </a>
                     </li>
                 </ul>

@@ -1,0 +1,71 @@
+{%extends 'Core/recepcionista/baseRecepcionista.html' %}
+{% block content %} 
+<style>
+    .pedido-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.pedido-table th,
+.pedido-table td {
+    border-bottom: 1px solid black; /* Línea horizontal */
+    padding: 8px;
+    text-align: left;
+}
+
+.pedido-table th {
+    background-color: #f2f2f2; /* Color de fondo para las celdas de encabezado */
+}
+
+.pedido-table tr:last-child th,
+.pedido-table tr:last-child td {
+    border-bottom: none; /* No mostrar la línea horizontal en la última fila */
+}
+
+.pedido-table button {
+    background-color: #4CAF50; /* Color de fondo para el botón */
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+</style>
+<div>
+<table class="pedido-table">
+    <thead>
+        <tr>
+            <th>Cabaña</th>
+            <th>Fecha de Reserva</th>
+            <th>Fecha de Check In</th>
+            <th>Fecha de Check Out</th>
+            <th>Estado</th>
+            <th></th>
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for reserva in reservas %}
+            <tr>
+                <td>{{ reserva.cabana }}</td>
+                <td>{{ reserva.fechaReserva }}</td>
+                <td>{{ reserva.fechaCheckIn }}</td>
+                <td>{{ reserva.fechaCheckOut }}</td>
+                <td>{{ reserva.estado }}</td>
+                <td>
+                <form action="{% url 'ValidarCheckIn' reserva.id %}" method="post" class="eliminar-form">
+                    {% csrf_token %}
+                    <button class="" type="submit">Check in</button>
+                </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>    
+{% endblock %}

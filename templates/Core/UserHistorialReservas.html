@@ -2,20 +2,34 @@
 {% load static %}
 {% block body %}
 <style>
-    table {
-        border-collapse: collapse;
-        width: 100%;
-    }
+   .apa-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-family: Arial, sans-serif;
+            font-size: 12pt;
+        }
 
-    th, td {
-        border: 1px solid #dddddd;
-        text-align: left;
-        padding: 8px;
-    }
+        .apa-table thead th {
+            font-weight: bold;
+            text-align: left;
+            border-bottom: 2px solid black;
+            padding: 10px 5px;
+        }
 
-    th {
-        background-color: #f2f2f2;
-    }
+        .apa-table tbody td {
+            border-bottom: 1px solid #ddd;
+            padding: 8px 5px;
+            text-align: left;
+        }
+
+        .apa-table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .apa-table tbody tr:hover {
+            background-color: #f1f1f1;
+        }
     .detalle-link {
     display: inline-block;
     background-color: #4CAF50;
@@ -47,6 +61,7 @@
     cursor: pointer; /* Cambiar el cursor al pasar el ratón */
     border-radius: 4px; /* Bordes redondeados */
     transition-duration: 0.4s; /* Duración de la transición */
+    font-size: 0.8rem;
 }
 
 .eliminar-button:hover {
@@ -55,7 +70,7 @@
 </style>
 
     <h1>Historial Reservas</h1>
-    <table>
+    <table class="apa-table">
         <thead>
             <tr>
                 <th>Cabaña</th>

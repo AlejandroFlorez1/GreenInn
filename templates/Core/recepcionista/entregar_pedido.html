@@ -1,0 +1,65 @@
+{%extends 'Core/recepcionista/baseRecepcionista.html' %}
+
+{%block content%}
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+            text-align: left;
+        }
+        .btn-entregar {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 10px;
+            color: #fff;
+            background-color: #28a745;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .btn-entregar:hover {
+            background-color: #218838;
+        }
+    </style>
+
+
+    <h1>Detalle del Pedido {{ pedido.id }}</h1>
+    <p>Cliente: {{ pedido.Reserva.usuario.username }}</p>
+    <p>Cabaña: {{ pedido.Reserva.cabana.nomCabaña }}</p>
+    <p>Reserva: {{ pedido.Reserva.id }}</p>
+    <p>Estado: {{ pedido.estado.tipEstado }}</p>
+    
+    <h2>Productos en el Pedido</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID Producto</th>
+                <th>Nombre</th>
+                <th>Cantidad</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for producto in productos_pedido %}
+                <tr>
+                    <td>{{ producto.producto.id }}</td>
+                    <td>{{ producto.producto.nomProducto }}</td>
+                    <td>{{ producto.cantidad }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn-entregar">Marcar como Entregado</button>
+    </form>
+
+{%endblock%}

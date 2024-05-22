@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import home, Acercade, Cabañas, Restaurante, login_view, exit, inicio, User_Reservas, User_Historial_Reservas, User_Hacer_Reserva, User_Profile, User_Detalle_Reserva, User_Eliminar_Reserva, Productos_Desayuno   
+from .views import home, Acercade, Cabañas, Restaurante, login_view, exit, inicio, User_Reservas, User_Historial_Reservas, User_Hacer_Reserva, User_Profile, User_Detalle_Reserva, User_Eliminar_Reserva, Productos_Desayuno, User_Hacer_Pedido, Productos_almuerzo, Productos_bebidas, Productos_comida_rapida, Productos_snacks, Carrito, vaciar_carrito, Eliminar_elemento, Pedir, Pago, InicioRecepcionista, CheckIn, ValidarCheckIn, Historial, ProductoListView, ProductoUpdateView, ProductoDeleteView, producto_create_view, Pedidos, Entregar_pedido, inicioAdmin, recepcionistas_view, recepcionista_create, recepcionista_delete, recepcionista_detail, recepcionista_edit, cabaña_create,cabaña_delete,cabaña_update,cabañas_list, users_with_profiles
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
@@ -19,7 +19,38 @@ urlpatterns = [
     path('Profile/', User_Profile, name='user_profile'),
     path('reserva/<int:id_reserva>/', User_Detalle_Reserva , name='detalle_reserva'),
     path('reserva/<int:reserva_id>/eliminar/', User_Eliminar_Reserva, name='eliminar_reserva'),
-    path('productos_Desayuno/', Productos_Desayuno, name='productosDesayuno'),
+    path('HacerPedido/<int:id_pedido>/', User_Hacer_Pedido, name='hacerpedido'),
+    path('productos_Desayuno/<int:id_pedido>/', Productos_Desayuno, name='productosDesayuno'),
+    path('productos_Almuerzo/<int:id_pedido>', Productos_almuerzo, name='productosAlmuerzo'),
+    path('productos_Comidas_Rapidas/<int:id_pedido>', Productos_comida_rapida, name='productosComidasRapidas'),
+    path('productos_Bebidas/<int:id_pedido>', Productos_bebidas, name='productosBebidas'),
+    path('productos_Snacks/<int:id_pedido>', Productos_snacks, name='productosSnacks'),
+    path('carrito/<int:id_pedido>/', Carrito, name='carrito'),
+    path('carrito/<int:id_pedido>/vaciarCarrito/', vaciar_carrito, name='vaciarCarrito'),
+    path('carrito/<int:id_pedido_producto>/eliminarElemento/', Eliminar_elemento, name='eliminarElemento'),
+    path('carrito/<int:id_pedido>/pedir/', Pedir, name='pedir'),
+    path('pago/<int:id_reserva>/', Pago, name='pago'),
+    path('inicioRecepcionista/', InicioRecepcionista, name='inicioRecepcionista'),
+    path('checkin/', CheckIn, name='checkin'),
+    path('validarChechIn/<int:id_reserva>/', ValidarCheckIn, name='ValidarCheckIn'),
+    path('User_Historial', Historial, name='User_Historial'),
+    path('productos/', ProductoListView.as_view(), name='producto_list'),
+    path('productos/editar/<int:pk>/', ProductoUpdateView.as_view(), name='producto_edit'),
+    path('productos/eliminar/<int:pk>/', ProductoDeleteView.as_view(), name='producto_delete'),
+    path('productos/nuevo/', producto_create_view, name='producto_create'),
+    path('pedidos/', Pedidos, name='pedidos_view'),
+    path('entregar_pedido/<int:id_pedido>/', Entregar_pedido, name='entregar_pedido'),
+    path('inicioAdmin/', inicioAdmin, name='inicioAdministrativo'),
+    path('recepcionistas/', recepcionistas_view, name='recepcionista_view'),
+    path('recepcionistas/<str:username>/', recepcionista_detail, name='recepcionista_detail'),
+    path('recepcionistas/<str:username>/edit/', recepcionista_edit, name='recepcionista_edit'),
+    path('recepcionistas_create/', recepcionista_create, name='recepcionista_create'),
+    path('recepcionistas/<str:username>/delete/', recepcionista_delete, name='recepcionista_delete'),
+    path('cabañas_list/', cabañas_list, name='cabañas_list'),
+    path('cabañas/create/', cabaña_create, name='cabaña_create'),
+    path('cabañas/<int:pk>/update/', cabaña_update, name='cabaña_update'),
+    path('cabañas/<int:pk>/delete/', cabaña_delete, name='cabaña_delete'),
+    path('users/', users_with_profiles, name='users_with_profiles'),
 ]
 
 

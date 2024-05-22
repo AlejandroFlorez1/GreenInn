@@ -1,0 +1,20 @@
+{%extends 'Core/admin/inicioAdmin.html' %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Confirmar Eliminación</title>
+</head>
+<body>
+    <h1>Confirmar Eliminación</h1>
+    <p>¿Estás seguro de que deseas eliminar la cabaña "{{ cabaña.nomCabaña }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Eliminar</button>
+    </form>
+</body>
+</html>
+
+{% endblock %}
